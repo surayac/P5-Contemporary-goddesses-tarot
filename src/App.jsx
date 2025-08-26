@@ -2,6 +2,7 @@ import { useState } from 'react'
 import './App.css'
 import { Toaster } from 'react-hot-toast'
 import Header from './components/Header/Header'
+import Footer from './components/Footer/Footer'
 
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
       <div><h1>ORÁCULO DE LAS DIOSAS</h1>
       <Toaster />
       </div>
+      <Footer />
     </>
   )
 }
