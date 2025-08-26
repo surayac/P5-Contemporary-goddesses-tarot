@@ -1,17 +1,22 @@
-import { useState } from 'react'
-import './App.css'
-import { Toaster } from 'react-hot-toast'
+
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
+
+import Intro from "./pages/Intro.jsx";
+
 
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>    
-      <h1>ORÁCULO DE LAS DIOSAS</h1>
-      <Toaster />
-    </>
-  )
+    <BrowserRouter>
+      <Routes>
+        {/* Página de inicio */}
+        <Route path="/" element={<Intro />} />
+      </Routes>
+      {/* Notificaciones toast */}
+      <Toaster position="top-right" />
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;
