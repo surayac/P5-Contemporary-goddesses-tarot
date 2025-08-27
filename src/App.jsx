@@ -1,21 +1,23 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Toaster } from "react-hot-toast";
-import Header from "./components/Header/Header";
+import { useState } from 'react'
+import './App.css'
+import { Toaster } from 'react-hot-toast'
+import Header from './components/Header/Header'
+import Intro from './pages/Intro'
+import FormUsuario from './components/Form/FormUsuario'
 
-import Intro from "./pages/Intro.jsx";
 
 function App() {
+  
   return (
-    <BrowserRouter>
-      <Header />
-      <Routes>
-        {/* Página de inicio */}
-        <Route path="/" element={<Intro />} />
-      </Routes>
-      {/* Notificaciones toast */}
-      <Toaster position="top-right" />
-    </BrowserRouter>
-  );
+    <> 
+    
+    <Header />    
+    <h1>ORÁCULO DE LAS DIOSAS</h1>
+    <Intro /> 
+    <Toaster position="top-right" reverseOrder={false} />
+    <FormUsuario />
+    </>
+  )
 }
 
 export default App;
