@@ -1,115 +1,52 @@
 
-import React, { useEffect, useState } from 'react';
+import { useState } from "react";
 
+function Form({ onSubmit }) {
+  const [name, setName] = useState("");
 
-export default function Form({
-  initialValue = '',
-  placeholder = 'ingresa tu nombre',
-  btnLabel = '¡Comenzar!',
-  onSubmit,
-  onReset,
-  disabled = false,
-}) {
-  const [value, setValue] = useState(initialValue); 
-  const [error, setError] = useState('');           
-  const [submitting, setSubmitting] = useState(false); 
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
+    const today = new Date().toLocaleDateString("es-ES", {
+      day: "2-digit",
+      month: "long",
+      year: "numeric",
+    });
 
-  useEffect(() => {
-    setValue(initialValue ?? '');
-  }, [initialValue]);
+    const newUser = { name, date: today };
 
-
-  function validate(v) {
-    const t = String(v ?? '').trim();
-    if (!t) return 'El nombre no puede estar vacío.';
-    if (t.length > 30) return 'El nombre no puede exceder 30 caracteres.';
-    return '';
-  }
-
-
-  const handleChange = (e) => {
-    setValue(e.target.value);
-    if (error) setError('');
-  };
-
-  
-  const handleSubmit = async (e) => {
-    e?.preventDefault?.();
-    if (disabled || submitting) return;
-
-    const err = validate(value);
-    if (err) {
-      setError(err);
-      return;
+    if (onSubmit) {
+      onSubmit(newUser);
     }
 
-    setSubmitting(true);
-    try {
-
-      await onSubmit?.(value.trim());
-    } catch (err) {
-    
-      console.error('FormUsuario onSubmit error:', err);
-      setError('No se pudo procesar. Intenta de nuevo.');
-    } finally {
-      setSubmitting(false);
-    }
-  };
-
-  const handleReset = () => {
-    setValue('');
-    setError('');
-    onReset?.();
+    setName("");
   };
 
   return (
-    <form
-      className="form-user"
-      onSubmit={handleSubmit}
-      aria-label="Formulario para ingresar nombre de usuario"
-    >
-      
-      <label htmlFor="user-name" className="visually-hidden">Nombre de usuario</label>
+    <section className="max-w-md mx-auto rounded-2xl shadow-md">
+      <form onSubmit={handleSubmit} className="text-center">
+        <div className="flex flex sm:flex items-center justify-center gap-4 sm:space-x-6 space-y-6">
+          <input
+            id="name"
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            className="bg-[#7B88B0] opacity-90 "
+            placeholder="Ingresar nombre "
+            required
+          />
 
-      <input
-        id="user-name"
-        className="form-input"
-        type="text"
-        value={value}
-        onChange={handleChange}
-        placeholder={placeholder}
-        aria-label="nombre de usuario"
-        aria-required="true"
-        aria-invalid={!!error}
-        disabled={disabled || submitting}
-      />
-
-      <button
-        type="submit"
-        className="btn"
-        disabled={disabled || submitting}
-        aria-disabled={disabled || submitting}
-      >
-        {submitting ? 'Cargando...' : btnLabel}
-      </button>
-
-      <button
-        type="button"
-        className="btn btn-secondary"
-        onClick={handleReset}
-        disabled={disabled || submitting}
-        aria-disabled={disabled || submitting}
-      >
-        Limpiar
-      </button>
-
-    
-      <div className="form-messages" aria-live="polite">
-        {error ? (
-          <p className="form-error" role="alert">{error}</p>
-        ) : null}
-      </div>
-    </form>
+          <button
+            type="submit"
+            className="rounded-xl text-black hover:text-[#ffffff] bg-[#FFDBB7] hover:bg-[#5D688A] px-6 py-2 cursor-pointer text-xl w-full sm:w-auto"
+          >
+            ¡Comenzar!
+          </button>
+        </div>
+      </form>
+    </section>
   );
 }
+
+export default Form;
+
