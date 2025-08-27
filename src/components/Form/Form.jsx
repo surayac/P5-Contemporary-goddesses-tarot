@@ -1,8 +1,7 @@
-
 import React, { useEffect, useState } from 'react';
 
 
-export default function FormUsuario({
+export default function Form({
   initialValue = '',
   placeholder = 'ingresa tu nombre',
   btnLabel = '¡Comenzar!',
@@ -50,7 +49,7 @@ export default function FormUsuario({
       await onSubmit?.(value.trim());
     } catch (err) {
     
-      console.error('FormUsuario onSubmit error:', err);
+      console.error('Form onSubmit error:', err);
       setError('No se pudo procesar. Intenta de nuevo.');
     } finally {
       setSubmitting(false);
