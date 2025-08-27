@@ -11,13 +11,12 @@ function App() {
   
   return (
     <> 
-    
+     <Toaster position="top-right" reverseOrder={false} />
     <Header />    
-    <h1>ORÁCULO DE LAS DIOSAS</h1>
-    <Intro /> 
-    <Toaster position="top-right" reverseOrder={false} />
-    <FormUsuario />
-      <Footer />
+    <div><h1>ORÁCULO DE LAS DIOSAS</h1>
+    <Intro />    
+    <FormUsuario /></div>
+    <Footer />
     </>
   )
 }
