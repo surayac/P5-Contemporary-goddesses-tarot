@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 
 
-export default function FormUsuario({
+export default function Form({
   initialValue = '',
   placeholder = 'ingresa tu nombre',
   btnLabel = '¡Comenzar!',
