@@ -1,8 +1,15 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Form from "../components/Form/Form";
 
 export default function Homepage() {
   const [userData, setUserData] = useState(null);
+  const navigate = useNavigate();
+
+  const handleSubmit = (newUser) => {
+    setUserData(newUser);
+    navigate("/deck", { state: { playerName: newUser.name, lastDate: newUser.date } });
+  };
 
   return (
     <main className="min-h-screen flex flex-col items-center justify-center">
@@ -22,13 +29,8 @@ export default function Homepage() {
         </div>
       </section>
 
-
       <section className="mt-10">
-        <Form
-          onSubmit={(newUser) => {
-            setUserData(newUser);
-          }}
-        />
+        <Form onSubmit={handleSubmit} />
       </section>
 
       {userData && (
@@ -44,3 +46,4 @@ export default function Homepage() {
     </main>
   );
 }
+
