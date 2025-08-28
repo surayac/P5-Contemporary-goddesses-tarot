@@ -35,12 +35,14 @@ export default function Homepage() {
 
       {userData && (
         <section className="text-center mt-10">
-          <h3 className="text-xl text-[#D3A85D] sm:text-4xl font-bold mb-4 mt-8">
-            Bienvenido, {userData.name}!
-          </h3>
-          <p className="text-white text-base sm:text-lg md:text-xl lg:text-1xl font-bold mb-4">
-            Su última tirada ha sido: <strong>{userData.date}</strong>
-          </p>
+          <div className="w-5xl mx-auto bg-[#1f1f50]/50 p-6 shadow-lg">
+            <h3 className="text-xl text-[#ffdbb7] sm:text-4xl font-bold mb-4 mt-8">
+              ¡Hola, {userData.name}!
+            </h3>
+            <p className="text-white text-base sm:text-lg md:text-xl lg:text-1xl font-bold mb-4">
+              Su última tirada ha sido: <strong>{userData.date}</strong>
+            </p>
+          </div>
         </section>
       )}
     </main>
