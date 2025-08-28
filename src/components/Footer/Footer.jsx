@@ -5,9 +5,9 @@ import whatsapp from "../../assets/whatsapp.png"
 
 function Footer() {
     return (
-        <footer className="fixed bottom-0 left-0 w-full h-15 shadow-md">
+        <footer className="bottom-0 left-0 mt-8 mb-5 w-full h-full shadow-md">
             <div className="max-w-7xl mx-auto flex flex-col-reverse md:flex-row items-center justify-between gap-4">
-                <p className="text-center md:text-right text-white">
+                <p className="text-center text-xl md:text-right text-white">
                     © 2025. Todos los derechos reservados.
                 </p>
                 <div className="flex gap-9">
@@ -16,18 +16,16 @@ function Footer() {
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label="Instagram"
-                        className="hover:text-gray-300 transition text-xl"
                     >
-                        <img src={instagram} alt="Instagram" className="w-[20px] h-auto" />
+                        <img src={instagram} alt="Instagram" className="w-8 h-auto transition-transform duration-200 hover:scale-125" />
                     </a>
                     <a
                         href="https://tiktok.com"
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label="TikTok"
-                        className="hover:text-gray-300 transition text-xl"
                     >
-                       <img src={tiktok} alt="TikTok" className="w-[20px] h-auto" />
+                       <img src={tiktok} alt="TikTok" className="w-8 h-auto transition-transform duration-200 hover:scale-125" />
                     </a>
 
                     <a
@@ -35,9 +33,8 @@ function Footer() {
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label="WhatsApp"
-                        className="hover:text-gray-300 transition text-xl"
                     >
-                        <img src={whatsapp} alt="Instagram" className="w-[20px] h-auto" />
+                        <img src={whatsapp} alt="Instagram" className="w-8 h-auto transition-transform duration-200 hover:scale-125" />
                     </a>
 
                 </div>

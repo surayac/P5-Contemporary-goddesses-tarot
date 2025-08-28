@@ -4,7 +4,7 @@
   --font-metamorphous: "Metamorphous", serif;
   --font-merriweather: "Merriweather", serif;
 
-  --bg-image: url("/public/Background.png");
+  --bg-image: url("/src/assets/Background.png");
   
   --color-bgDark: #141540;
   --color-starDust: #ffdbb7;
