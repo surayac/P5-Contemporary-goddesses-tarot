@@ -9,7 +9,7 @@ import { Routes, Route } from 'react-router-dom'
 function App() {
   return (
     <>
-      <Toaster position="top-right" reverseOrder={false} />
+      <Toaster position="top-center" reverseOrder={false} />
       <Header />
 
       <Routes>
