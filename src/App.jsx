@@ -1,17 +1,20 @@
-import { useState } from 'react'
 import './App.css'
 import { Toaster } from 'react-hot-toast'
+import Header from './components/Header/Header'
+import Footer from './components/Footer/Footer'
+import Homepage from './pages/Homepage'
 
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
-    <>    
-      <h1>ORÁCULO DE LAS DIOSAS</h1>
-      <Toaster />
+    <>
+      <Toaster position="top-right" reverseOrder={false} />
+      <Header />
+      <Homepage />
+      <Footer />
     </>
   )
 }
 
-export default App
+export default App;
