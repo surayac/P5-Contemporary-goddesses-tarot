@@ -5,6 +5,7 @@ import Footer from './components/Footer/Footer'
 import Homepage from './pages/Homepage'
 import Deck from './components/Deck'
 import { Routes, Route } from 'react-router-dom'
+import Cards from './pages/Cards'
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/deck" element={<Deck />} />
+        <Route path="/cards" element={<Cards />} />
       </Routes>
 
       <Footer />
