@@ -38,7 +38,8 @@ function Form({ onSubmit }) {
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="w-80 h-12 px-4 rounded-xl bg-[#7B88B0] opacity-80 text-black placeholder:text-black text-xl"
+            style={{ fontFamily: "var(--font-merriweather)" }}
+            className="w-80 h-12 px-4 rounded-xl bg-[#7B88B0]/70 text-black placeholder:text-black text-xl"
             placeholder="Ingresar nombre"
           />
 

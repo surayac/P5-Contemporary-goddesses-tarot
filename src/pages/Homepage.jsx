@@ -14,18 +14,21 @@ export default function Homepage() {
   return (
     <main className="min-h-screen flex flex-col items-center justify-center">
       <section className="text-center w-full">
-        <h1 className="font-metamorphous text-[32px] md:text-5xl text-[#FFDBB7] drop-shadow-[0_0_8px_#FFDBB7]">
-          ORÁCULO DE    <br className="block md:hidden" /> LAS DIOSAS
+        <h1 className="font-metamorphous text-5xl md:text-6xl lg:text-7xl text-[#FFDBB7] drop-shadow-[0_0_8px_#FFDBB7]">
+           EL PORTAL DE <br className="md:hidden" /> LAS ARCANAS
         </h1>
 
         <div className="bg-[radial-gradient(circle_at_center,_rgba(255,219,183,0.3),_rgba(20,21,64,0.3))] rounded-3xl
-             pt-12 pb-12 px-[15%]  md:pt-16 md:pb-16 md:px-12 mx-auto mt-8 max-w-3xl">
-          <p className="font-merriweather-regular text-[18px] md:text-[20px] text-[#FFDBB7] leading-relaxed text-justify">
-            Este es el oráculo de las brujas contemporáneas. Elige tres cartas: una que habla de las señales de tu pasado, la central que habla de tu presente
-            y la final que te dirá qué esperar del futuro. Cada arcano mayor se manifiesta a través de una mujer del ámbito STEM, elegida como referente y
-            símbolo de inspiración. Esta experiencia une el lenguaje del tarot con la memoria de quienes transformaron la ciencia y la tecnología. La intención
-            es sembrar curiosidad, aprendizaje y reconocimiento hacia estas figuras.
-          </p>
+             pt-12 pb-12 md:pt-16 md:pb-16 md:px-12 mx-auto mt-8 max-w-[70%]">
+          <div>
+            <p className="font-merriweather text-lg md:text-[20px] lg:text-[28px] text-[#FFDBB7] leading-relaxed text-justify">Este es el oráculo de las brujas contemporáneas. </p>
+            <p className="font-merriweather text-[18px] md:text-[20px] lg:text-[28px] text-[#FFDBB7] leading-relaxed text-justify">Elige tres cartas: una que habla de las señales de tu pasado, la central que habla de tu presente
+            y la final que te dirá qué esperar del futuro. </p>
+            <p className="font-merriweather text-[18px] md:text-[20px] lg:text-[28px] text-[#FFDBB7] leading-relaxed text-justify">Cada arcano mayor se manifiesta a través de una mujer del ámbito STEM, elegida como referente y
+            símbolo de inspiración. </p>
+            <p className="font-merriweather text-[18px] md:text-[20px] lg:text-[28px] text-[#FFDBB7] leading-relaxed text-justify">Esta experiencia une el lenguaje del tarot con la memoria de quienes transformaron la ciencia y la tecnología. La intención
+            es sembrar curiosidad, aprendizaje y reconocimiento hacia estas figuras.</p>
+            </div>
         </div>
       </section>
 
