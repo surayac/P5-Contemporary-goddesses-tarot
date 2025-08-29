@@ -2,7 +2,13 @@
 
 :root {
   --font-metamorphous: "Metamorphous", serif;
-  --font-merriweather: "Merriweather", serif;
+  --font-merriweather-light: "Merriweather", serif;
+  --font-merriweather-regular: "Merriweather", serif;
+  --font-merriweather-bold: "Merriweather", serif;
+  --font-merriweather-light-italic: "Merriweather", serif;
+  --font-merriweather-regular-italic: "Merriweather", serif;
+  --font-merriweather-bold-italic: "Merriweather", serif;
+  
 
   --bg-image: url("/public/Background.png");
   
