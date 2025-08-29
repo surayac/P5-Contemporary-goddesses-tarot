@@ -12,7 +12,7 @@ const Deck = () => {
   useEffect(() => {
     (async () => {
       const data = await getAllCards();
-      setCards(data || []);
+      setCards(data.data || []);
     })();
   }, []);
 
