@@ -29,29 +29,31 @@ const Deck = () => {
         )}
       </div>
 
-      <div
-        className="inline-flex"
-        style={{ ["--overlap"]: "clamp(12px, 2.5vw, 48px)" }}
-      >
-        {cards.map((card, index) => (
-          <div
-            key={card.id ?? index}
-            style={{ marginLeft: index === 0 ? 0 : "calc(var(--overlap) * -1)" }}
-            className="
-              transition-transform duration-200
-              hover:-translate-y-2 hover:z-20 hover:scale-[1.02]
-              focus-within:-translate-y-2 focus-within:z-20
-            "
-          >
-            <Card card={card} />
-          </div>
-        ))}
+      <div className="w-full max-w-screen-xl overflow-hidden">
+        <div
+          className="inline-flex"
+          style={{ ["--overlap"]: "clamp(59px, calc(100vw / 24), 88px)" }}
+        >
+          {cards.map((card, index) => (
+            <div
+              key={card.id ?? index}
+              style={{
+                marginLeft: index === 0 ? 0 : "calc(var(--overlap) * -1)",
+              }}
+              className="
+                transition-transform duration-200
+                hover:-translate-y-2 hover:z-20 hover:scale-[1.02]
+                focus-within:-translate-y-2 focus-within:z-20
+              "
+            >
+              <Card card={card} />
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
 };
 
 export default Deck;
-
-
 
