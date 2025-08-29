@@ -8,12 +8,13 @@ export default function History() {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  // URL de tu JSON Server
+  
   const HISTORY_API = "http://localhost:3001/history";
+
   // URL de tu API de cartas
   const CARDS_API = "https://6872278c76a5723aacd3cbb3.mockapi.io/api/v1/tarot";
 
-  // cargar historial
+
   useEffect(() => {
     const fetchHistory = async () => {
       try {
@@ -46,7 +47,7 @@ export default function History() {
     fetchHistory();
   }, []);
 
-  // borrar una lectura
+  // Para borrar una lectura
   const handleDelete = async (id) => {
     try {
       await fetch(`${HISTORY_API}/${id}`, { method: "DELETE" });
