@@ -6,6 +6,7 @@ import Homepage from './pages/Homepage'
 import Deck from './components/Deck'
 import { Routes, Route } from 'react-router-dom'
 import Cards from './pages/Cards'
+import Reading from './pages/Reading';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Header />
 
       <Routes>
+        <Route path="/reading" element={<Reading />} />
         <Route path="/" element={<Homepage />} />
         <Route path="/deck" element={<Deck />} />
         <Route path="/cards" element={<Cards />} />
