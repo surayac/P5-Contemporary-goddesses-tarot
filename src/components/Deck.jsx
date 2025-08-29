@@ -1,20 +1,45 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Card from "./Card";
 import { getAllCards } from "../services/ApiCards";
 
 const Deck = () => {
   const [cards, setCards] = useState([]);
+  const [clickCount, setClickCount] = useState(0);
+  const [selectedCards, setSelectedCards] = useState([]);
   const { state } = useLocation();
+  const navigate = useNavigate();
+
   const playerName = state?.playerName || "Jugador";
   const lastDate = state?.lastDate;
 
   useEffect(() => {
-    (async () => {
-      const data = await getAllCards();
-      setCards(data || []);
-    })();
+    const getCards = async () => {
+      try {
+        const response = await getAllCards();
+        setCards(response.data.sort(() => Math.random() - 0.5));
+      } catch (error) {
+        console.error("Error obtaining the cards:", error);
+      }
+    };
+    getCards();
   }, []);
+
+  const handleCardClick = (card) => {
+    if (selectedCards.includes(card.id) || selectedCards.length >= 3) return;
+
+    const newSelected = [...selectedCards, card.id];
+    setSelectedCards(newSelected);
+
+    if (newSelected.length === 3) {
+      const shuffledCards = [...cards].sort(() => Math.random() - 0.5);
+      const chosenCards = shuffledCards.filter(c => newSelected.includes(c.id));
+      localStorage.setItem('selectedCards', JSON.stringify(chosenCards));
+
+      setTimeout(() => navigate("/cards"), 1000);
+    }
+  };
+
 
   return (
     <main className="min-h-screen flex flex-col justify-center px-4">
@@ -30,31 +55,32 @@ const Deck = () => {
         <h1 className="font-metamorphous text-4xl md:text-4xl text-[#FFDBB7] mb-10 mt-15">
           Escoge tres cartas </h1>
 
-      <div className="w-full max-w-screen-xl overflow-hidden">
+        <div className="w-full h-full">
           <div
             className="inline-flex"
             style={{ ["--overlap"]: "clamp(59px, calc(100vw / 24), 88px)" }}
           >
-            {cards.map((card, index) => (
-              <div
-                key={card.id ?? index}
-                style={{
-                marginLeft: index === 0 ? 0 : "calc(var(--overlap) * -1)",
-              }}
-                className="
+            {cards.map((card, index) => {
+              const isSelected = selectedCards.includes(card.id);
+              return (
+                <div
+                  key={card.id ?? index}
+                  style={{
+                    marginLeft: index === 0 ? 0 : "calc(var(--overlap) * -1)",
+                  }}
+                  className={`
                 transition-transform duration-200
-                hover:-translate-y-2 hover:z-20 hover:scale-[1.02]
-                focus-within:-translate-y-2 focus-within:z-20
-              "
-              >
-                <Card card={card} />
-              </div>
-            ))}
+                 ${isSelected ? "-translate-y-6 z-30" : "hover:-translate-y-2 hover:z-20 hover:scale-[1.02] focus-within:-translate-y-2 focus-within:z-20"}
+                  `}
+                  onClick={() => handleCardClick(card)}
+                >
+                  <Card card={isSelected ? { ...card, image: "/src/assets/card.png" } : card} />
+                </div>
+              )
+            })}
+          </div>
         </div>
-        </div>
-        <button
-          onClick={() => navigate("/cards", { state })}
-          className="h-12 px-6 rounded-xl text-black hover:text-white bg-[#FFDBB7] hover:bg-[#5D688A] border border-black cursor-pointer text-xl w-full mt-10 sm:w-auto">"botón para llevar a la pagina de cartas"</button>
+
       </section>
     </main>
   );
