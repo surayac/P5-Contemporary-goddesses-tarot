@@ -30,23 +30,27 @@ const Deck = () => {
         <h1 className="font-metamorphous text-4xl md:text-4xl text-[#FFDBB7] mb-10 mt-15">
           Escoge tres cartas </h1>
 
-        <div
-          className="inline-flex"
-          style={{ ["--overlap"]: "clamp(12px, 2.5vw, 48px)" }}
-        >
-          {cards.map((card, index) => (
-            <div
-              key={card.id ?? index}
-              style={{ marginLeft: index === 0 ? 0 : "calc(var(--overlap) * -1)" }}
-              className="
-              transition-transform duration-200
-              hover:-translate-y-2 hover:z-20 hover:scale-[1.02]
-              focus-within:-translate-y-2 focus-within:z-20
-            "
-            >
-              <Card card={card} />
-            </div>
-          ))}
+      <div className="w-full max-w-screen-xl overflow-hidden">
+          <div
+            className="inline-flex"
+            style={{ ["--overlap"]: "clamp(59px, calc(100vw / 24), 88px)" }}
+          >
+            {cards.map((card, index) => (
+              <div
+                key={card.id ?? index}
+                style={{
+                marginLeft: index === 0 ? 0 : "calc(var(--overlap) * -1)",
+              }}
+                className="
+                transition-transform duration-200
+                hover:-translate-y-2 hover:z-20 hover:scale-[1.02]
+                focus-within:-translate-y-2 focus-within:z-20
+              "
+              >
+                <Card card={card} />
+              </div>
+            ))}
+        </div>
         </div>
         <button
           onClick={() => navigate("/cards", { state })}
@@ -57,6 +61,4 @@ const Deck = () => {
 };
 
 export default Deck;
-
-
 
