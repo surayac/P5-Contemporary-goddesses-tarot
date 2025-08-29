@@ -11,3 +11,13 @@ export const getAllCards = async () => {
     return [];
   }
 };
+
+export const getSelectedCards = async () => {
+  try {
+    const response = await axios.get(API_URL);
+    return response.data;
+  } catch (error) {
+    console.error("Error getting readings:", error);
+    throw error;
+  }
+};

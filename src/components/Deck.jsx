@@ -11,7 +11,7 @@ const Deck = () => {
   const navigate = useNavigate();
 
   const playerName = state?.playerName || "Jugador";
-  const lastDate = state?.lastDate;
+  const lastDate = state?.lastDate || new Date().toLocaleDateString("es-ES");
 
   useEffect(() => {
     const getCards = async () => {
@@ -43,21 +43,20 @@ const Deck = () => {
 
   return (
     <main className="min-h-screen flex flex-col justify-center px-4">
-      <section className="flex justify-between items-start w-full mb-8">
-        <p className="text-white text-left text-1xl md:text-1xl"> Bienvenido, {playerName}!</p>
+      <section className="flex justify-between items-center w-full mb-8">
+        <p>Bienvenido, {playerName}!</p>
         {lastDate && (
-          <p className="text-[#D3A85D] text-right text-1xl md:text-1xl">
-            Última tirada: {lastDate}</p>
+          <p> {lastDate}</p>
         )}
       </section>
 
-      <section className="text-center mb-6">
-        <h1 className="font-metamorphous text-4xl md:text-4xl text-[#FFDBB7] mb-10 mt-15">
+      <section className="text-center mb-6 outline-hidden">
+        <h1 className="text-4xl md:text-4xl mb-10 mt-15">
           Escoge tres cartas </h1>
 
-        <div className="w-full h-full">
+        <div className="w-full">
           <div
-            className="inline-flex"
+            className="inline-flex relative"
             style={{ ["--overlap"]: "clamp(59px, calc(100vw / 24), 88px)" }}
           >
             {cards.map((card, index) => {
@@ -67,10 +66,11 @@ const Deck = () => {
                   key={card.id ?? index}
                   style={{
                     marginLeft: index === 0 ? 0 : "calc(var(--overlap) * -1)",
+                    zIndex: isSelected ? 30 : index,
                   }}
                   className={`
                 transition-transform duration-200
-                 ${isSelected ? "-translate-y-6 z-30" : "hover:-translate-y-2 hover:z-20 hover:scale-[1.02] focus-within:-translate-y-2 focus-within:z-20"}
+                 ${isSelected ? "-translate-y-8" : "hover:-translate-y-2 hover:z-20 hover:scale-[1.02] focus-within:-translate-y-2 focus-within:z-20"}
                   `}
                   onClick={() => handleCardClick(card)}
                 >
