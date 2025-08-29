@@ -10,7 +10,7 @@
   --font-merriweather-bold-italic: "Merriweather", serif;
   
 
-  --bg-image: url("/public/Background.png");
+  --bg-image: url("/src/assets/Background.png");
   
   --color-bgDark: #141540;
   --color-starDust: #ffdbb7;
@@ -25,7 +25,8 @@ body {
   background-repeat: no-repeat;
 }
 
-h1 {
+h1, p {
   font-family: var(--font-metamorphous);
   color: var(--color-starDust);
 }
+

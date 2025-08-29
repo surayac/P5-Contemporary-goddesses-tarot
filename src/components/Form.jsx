@@ -1,11 +1,17 @@
 
 import { useState } from "react";
+import { Toaster, toast } from "react-hot-toast";
 
 function Form({ onSubmit }) {
   const [name, setName] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (!name.trim()) {
+      toast.error("Por favor, ingresa tu nombre.");
+      return;
+    }
 
     const today = new Date().toLocaleDateString("es-ES", {
       day: "2-digit",
@@ -25,20 +31,20 @@ function Form({ onSubmit }) {
   return (
     <section className="max-w-md mx-auto rounded-2xl shadow-md">
       <form onSubmit={handleSubmit} className="text-center">
-        <div className="flex flex sm:flex items-center justify-center gap-4 sm:space-x-6 space-y-6">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <label htmlFor="name"></label>
           <input
             id="name"
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="bg-[#7B88B0] opacity-90 "
-            placeholder="Ingresar nombre "
-            required
+            className="w-80 h-12 px-4 rounded-xl bg-[#7B88B0] opacity-80 text-black placeholder:text-black text-xl"
+            placeholder="Ingresar nombre"
           />
 
           <button
             type="submit"
-            className="rounded-xl text-black hover:text-[#ffffff] bg-[#FFDBB7] hover:bg-[#5D688A] px-6 py-2 cursor-pointer text-xl w-full sm:w-auto"
+            className="h-12 px-6 rounded-xl text-black hover:text-white bg-[#FFDBB7] hover:bg-[#5D688A] border border-black cursor-pointer text-xl w-full sm:w-auto"
           >
             ¡Comenzar!
           </button>
