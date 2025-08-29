@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Form from "../components/Form/Form";
+import Form from "../components/Form";
 
 export default function Homepage() {
   const [userData, setUserData] = useState(null);
