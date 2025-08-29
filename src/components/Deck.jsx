@@ -1,57 +1,90 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Card from "./Card";
 import { getAllCards } from "../services/ApiCards";
 
 const Deck = () => {
   const [cards, setCards] = useState([]);
+  const [clickCount, setClickCount] = useState(0);
+  const [selectedCards, setSelectedCards] = useState([]);
   const { state } = useLocation();
+  const navigate = useNavigate();
+
   const playerName = state?.playerName || "Jugador";
   const lastDate = state?.lastDate;
 
   useEffect(() => {
-    (async () => {
-      const data = await getAllCards();
-      setCards(data || []);
-    })();
+    const getCards = async () => {
+      try {
+        const response = await getAllCards();
+        setCards(response.data.sort(() => Math.random() - 0.5));
+      } catch (error) {
+        console.error("Error obtaining the cards:", error);
+      }
+    };
+    getCards();
   }, []);
 
-  return (
-    <section className="min-h-screen flex flex-col items-center justify-center px-4">
-      <div className="text-center mb-8">
-        <h1 className="text-white text-2xl md:text-3xl font-bold">
-          Bienvenido, {playerName}!
-        </h1>
-        {lastDate && (
-          <p className="text-[#D3A85D] mt-2">
-            Última tirada: <strong>{lastDate}</strong>
-          </p>
-        )}
-      </div>
+  const handleCardClick = (card) => {
+    if (selectedCards.includes(card.id) || selectedCards.length >= 3) return;
 
-      <div
-        className="inline-flex"
-        style={{ ["--overlap"]: "clamp(12px, 2.5vw, 48px)" }}
-      >
-        {cards.map((card, index) => (
+    const newSelected = [...selectedCards, card.id];
+    setSelectedCards(newSelected);
+
+    if (newSelected.length === 3) {
+      const shuffledCards = [...cards].sort(() => Math.random() - 0.5);
+      const chosenCards = shuffledCards.filter(c => newSelected.includes(c.id));
+      localStorage.setItem('selectedCards', JSON.stringify(chosenCards));
+
+      setTimeout(() => navigate("/cards"), 1000);
+    }
+  };
+
+
+  return (
+    <main className="min-h-screen flex flex-col justify-center px-4">
+      <section className="flex justify-between items-start w-full mb-8">
+        <p className="text-white text-left text-1xl md:text-1xl"> Bienvenido, {playerName}!</p>
+        {lastDate && (
+          <p className="text-[#D3A85D] text-right text-1xl md:text-1xl">
+            Última tirada: {lastDate}</p>
+        )}
+      </section>
+
+      <section className="text-center mb-6">
+        <h1 className="font-metamorphous text-4xl md:text-4xl text-[#FFDBB7] mb-10 mt-15">
+          Escoge tres cartas </h1>
+
+        <div className="w-full h-full">
           <div
-            key={card.id ?? index}
-            style={{ marginLeft: index === 0 ? 0 : "calc(var(--overlap) * -1)" }}
-            className="
-              transition-transform duration-200
-              hover:-translate-y-2 hover:z-20 hover:scale-[1.02]
-              focus-within:-translate-y-2 focus-within:z-20
-            "
+            className="inline-flex"
+            style={{ ["--overlap"]: "clamp(59px, calc(100vw / 24), 88px)" }}
           >
-            <Card card={card} />
+            {cards.map((card, index) => {
+              const isSelected = selectedCards.includes(card.id);
+              return (
+                <div
+                  key={card.id ?? index}
+                  style={{
+                    marginLeft: index === 0 ? 0 : "calc(var(--overlap) * -1)",
+                  }}
+                  className={`
+                transition-transform duration-200
+                 ${isSelected ? "-translate-y-6 z-30" : "hover:-translate-y-2 hover:z-20 hover:scale-[1.02] focus-within:-translate-y-2 focus-within:z-20"}
+                  `}
+                  onClick={() => handleCardClick(card)}
+                >
+                  <Card card={isSelected ? { ...card, image: "/src/assets/card.png" } : card} />
+                </div>
+              )
+            })}
           </div>
-        ))}
-      </div>
-    </section>
+        </div>
+
+      </section>
+    </main>
   );
 };
 
 export default Deck;
-
-
 
