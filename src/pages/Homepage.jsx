@@ -37,7 +37,6 @@ export default function Homepage() {
         <Form onSubmit={handleSubmit} />
       </section>
 
-      
     </main>
   );
 }
