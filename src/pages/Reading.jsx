@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import ShowName from "../components/ShowName";
+import DateTime from "../components/DateTime";
 
 const Reading = () => {
     const [selectedCards, setSelectedCards] = useState([]);
@@ -27,19 +29,12 @@ const Reading = () => {
     }
 
     const [past, present, future] = selectedCards;
-    const readingDate = new Date().toLocaleString("es-ES", {
-        day: "2-digit",
-        month: "long",
-        year: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
-    });
 
     return (
         <main className="min-h-screen flex flex-col items-center justify-center px-4 py-10">
             <section className="flex flex-col md:flex-row justify-between w-full mt-10 mb-10">
-                <p className="text-lg md:text-2xl">¡Hola! </p>
-                <p className="text-lg md:text-2xl">{readingDate}</p>
+                <p className="text-lg md:text-2xl">¡Hola!, <ShowName/>  </p>
+                <p className="text-lg md:text-2xl"><DateTime/></p>
             </section>
 
             <section className="flex flex-col gap-4 mb-5">
