@@ -1,7 +1,7 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
-@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap');
+
 
 
 :root {
@@ -38,9 +38,6 @@ button:hover {
   color: var(--color-starDust);
   transition: background-color 0.3s, color 0.3s;
 }
-
-
-
 
 p {
   font-family: var(--font-merriweather);

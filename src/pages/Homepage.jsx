@@ -13,7 +13,8 @@ export default function Homepage() {
 
   
   return (
-    <main className="flex flex-col">
+  
+    <main className="flex flex-col mb-10">
       <section className="order-1 text-center">
         <h1 className="font-metamorphous text-3xl md:text-4xl lg:text-5xl text-starDust drop-shadow-[0_0_8px_#FFDBB7]">
            EL PORTAL DE <br className="md:hidden" /> LAS ARCANAS
@@ -33,11 +34,13 @@ export default function Homepage() {
         
       </section>
 
-      <section className="md:!order-3 order-2  mt-10 w-full px-20">
+      <section className="md:!order-3 order-2 mt-10 md:mb-10 w-full px-20">
         <Form onSubmit={handleSubmit} />
       </section>
-
+   
     </main>
+    
+ 
   );
 }
 
