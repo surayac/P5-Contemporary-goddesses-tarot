@@ -73,12 +73,12 @@ https://6872278c76a5723aacd3cbb3.mockapi.io/api/v1/tarot/:id
 
 This project was developed by:
 
-[Erika P. Montoya] (https://github.com/DevErika) → Product Owner & Developer
+[Erika P. Montoya](https://github.com/DevErika) → Product Owner & Developer
 
 [Daniella Pacheco](https://github.com/DaniPacheco8) → Scrum Master & Developer
 
-[Estefania Secanell] (https://github.com/Abaraira) → Developer
+[Estefania Secanell](https://github.com/Abaraira) → Developer
 
-[Suraya Souto] (https://github.com/surayac) → Developer
+[Suraya Souto](https://github.com/surayac) → Developer
 
-[Jashaira Azañedo] (https://github.com/JMileny89) → Developer
+[Jashaira Azañedo](https://github.com/JMileny89) → Developer
