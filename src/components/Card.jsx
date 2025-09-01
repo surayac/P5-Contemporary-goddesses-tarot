@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import backImage from "../assets/card.png";
 
-const Card = ({ card }) => {
-  const [flipped, setFlipped] = useState(false);
-
+const Card = ({ card, isSelected = false, onClick }) => {
+ 
   return (
     <button
-      onClick={() => setFlipped(true)}
+      onClick={onClick}
       className="
         w-28 h-40 md:w-32 md:h-48
         shrink-0 rounded-xl overflow-hidden
@@ -14,11 +13,11 @@ const Card = ({ card }) => {
         outline-none focus-visible:ring-2 focus-visible:ring-amber-300
         bg-black/10
       "
-      aria-label={flipped ? card.name : "Carta virada"}
+      aria-label={isSelected ? card.arcaneName : "Carta virada"}
     >
       <img
-        src={flipped ? card.image : backImage}
-        alt={flipped ? card.name : "Card back"}
+        src={isSelected ? card.arcaneImage.imageSrc : backImage}
+        alt={isSelected ? "Card back" : card.arcaneName}
         className="w-full h-full object-cover"
         onError={(e) => { e.currentTarget.src = backImage; }}
       />

@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap');
+
 
 :root {
   --font-metamorphous: "Metamorphous", serif;
@@ -19,8 +21,20 @@ body {
   background-repeat: no-repeat;
 }
 
-h1, p {
-  font-family: var(--font-metamorphous);
+h1, h2, h3, p, button {
+  font-family: var(--font-merriweather);
   color: var(--color-starDust);
 }
+
+button {
+  font-family: var(--font-merriweather);
+  color: #000;
+}
+
+button:hover {
+  color: var(--color-starDust);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+
 
