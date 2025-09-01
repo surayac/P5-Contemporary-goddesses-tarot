@@ -1,6 +1,6 @@
 # 🔮 Contemporary Goddesses Tarot
 
-🃏 A virtual tarot that reveals your past, present, and future — each card linked to a contemporary woman in STEM.
+A virtual tarot that reveals your past, present, and future — each card linked to a contemporary woman in STEM.
 Our goal is to honor and highlight women who are leading and innovating in fields that have traditionally been male-dominated.
 
 ## 🔍 Sneak Peek
@@ -11,13 +11,13 @@ Screenshot (once ready)
 
 Users can:
 
-✅ See all the cards face down (shuffled)
-✅ Select three cards (past, present, and future)
-✅ Reveal the meaning of each card
-✅ Learn about the contemporary goddess associated with each card
-✅ Save their readings in a history (with name and date)
-✅ Edit saved readings
-✅ Delete specific readings or clear the entire history
+- ✅ See all the cards face down (shuffled)  
+- ✅ Select three cards (past, present, and future)  
+- ✅ Reveal the meaning of each card  
+- ✅ Learn about the contemporary goddess associated with each card  
+- ✅ Save their readings in a history (with name and date)  
+- ✅ Edit saved readings  
+- ✅ Delete specific readings or clear the entire history  
 
 ## How to use it:
 
