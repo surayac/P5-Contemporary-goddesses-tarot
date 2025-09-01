@@ -5,86 +5,87 @@ import { getAllCards } from "../services/ApiCards";
 
 const Deck = () => {
   const [cards, setCards] = useState([]);
-  const [clickCount, setClickCount] = useState(0);
   const [selectedCards, setSelectedCards] = useState([]);
   const { state } = useLocation();
   const navigate = useNavigate();
 
-  const playerName = state?.playerName || "Jugador";
-  const lastDate = state?.lastDate || new Date().toLocaleDateString("es-ES");
+  const playerName = state?.playerName;
+  const lastDate = state?.lastDate || new Date().toLocaleString("es-ES", {
+    day: "2-digit",
+    month: "long",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
 
   useEffect(() => {
-    const getCards = async () => {
+    const fetchCards = async () => {
       try {
-        const response = await getAllCards();
-        setCards(response.data.sort(() => Math.random() - 0.5));
-      } catch (error) {
-        console.error("Error obtaining the cards:", error);
+        const data = await getAllCards();
+        setCards(data.sort(() => Math.random() - 0.5));
+      } catch (err) {
+        console.error("Error al buscar cartas:", err);
       }
     };
-    getCards();
+    fetchCards();
   }, []);
 
   const handleCardClick = (card) => {
-    if (selectedCards.includes(card.id) || selectedCards.length >= 3) return;
+    if (selectedCards.find(c => c.id === card.id) || selectedCards.length >= 3) return;
 
-    const newSelected = [...selectedCards, card.id];
+    const newSelected = [...selectedCards, card];
     setSelectedCards(newSelected);
 
     if (newSelected.length === 3) {
-      const shuffledCards = [...cards].sort(() => Math.random() - 0.5);
-      const chosenCards = shuffledCards.filter(c => newSelected.includes(c.id));
-      localStorage.setItem('selectedCards', JSON.stringify(chosenCards));
-
-      setTimeout(() => navigate("/cards"), 1000);
+      localStorage.setItem("selectedCards", JSON.stringify(newSelected));
+      setTimeout(() => navigate("/cards"), 500);
     }
   };
 
-
   return (
-    <main className="min-h-screen flex flex-col justify-center px-4">
-      <section className="flex justify-between items-center w-full mb-8">
-        <p>Bienvenido, {playerName}!</p>
-        {lastDate && (
-          <p> {lastDate}</p>
-        )}
+    <main className="min-h-screen flex flex-col items-center justify-center px-4 py-10">
+
+      <section className="flex justify-between w-full mb-8">
+        <p className="text-white text-lg md:text-2xl">¡Hola!, {playerName}!</p>
+        <p className="text-lg md:text-2xl">{lastDate}</p>
       </section>
 
-      <section className="text-center mb-6 outline-hidden">
-        <h1 className="text-4xl md:text-4xl mb-10 mt-15">
-          Escoge tres cartas </h1>
+      <h1 className="text-4xl md:text-5xl mb-10">Escoge tres cartas</h1>
 
-        <div className="w-full">
-          <div
-            className="inline-flex relative"
-            style={{ ["--overlap"]: "clamp(59px, calc(100vw / 24), 88px)" }}
-          >
-            {cards.map((card, index) => {
-              const isSelected = selectedCards.includes(card.id);
-              return (
-                <div
-                  key={card.id ?? index}
-                  style={{
-                    marginLeft: index === 0 ? 0 : "calc(var(--overlap) * -1)",
-                    zIndex: isSelected ? 30 : index,
-                  }}
-                  className={`
-                transition-transform duration-200
-                 ${isSelected ? "-translate-y-8" : "hover:-translate-y-2 hover:z-20 hover:scale-[1.02] focus-within:-translate-y-2 focus-within:z-20"}
-                  `}
-                  onClick={() => handleCardClick(card)}
-                >
-                  <Card card={isSelected ? { ...card, image: "/src/assets/card.png" } : card} />
-                </div>
-              )
-            })}
-          </div>
+      <div className="w-full flex justify-center">
+        <div
+          className="inline-flex relative"
+          style={{ ["--overlap"]: "clamp(59px, calc(100vw / 24), 88px)" }}
+        >
+          {cards.map((card, index) => {
+            const isSelected = selectedCards.find(c => c.id === card.id);
+            return (
+              <div
+                key={card.id}
+                style={{
+                  marginLeft: index === 0 ? 0 : "calc(var(--overlap) * -1)",
+                  zIndex: isSelected ? 30 : index,
+                }}
+                className={`transition-transform duration-200 cursor-pointer ${isSelected
+                  ? "-translate-y-10"
+                  : "hover:-translate-y-2 hover:z-20 hover:scale-[1.02] focus-within:-translate-y-2 focus-within:z-20"
+                  }`}
+                onClick={() => handleCardClick(card)}
+              >
+                <Card
+                  card={
+                    isSelected
+                      ? { ...card, arcaneImage: { ...card.arcaneImage } }
+                      : card
+                  }
+                />
+              </div>
+            );
+          })}
         </div>
-
-      </section>
+      </div>
     </main>
   );
 };
 
 export default Deck;
-

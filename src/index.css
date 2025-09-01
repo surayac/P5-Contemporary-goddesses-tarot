@@ -26,5 +26,15 @@ h1, h2, h3, p, button {
   color: var(--color-starDust);
 }
 
+button {
+  font-family: var(--font-merriweather);
+  color: #000;
+}
+
+button:hover {
+  color: var(--color-starDust);
+  transition: background-color 0.3s, color 0.3s;
+}
+
 
 
