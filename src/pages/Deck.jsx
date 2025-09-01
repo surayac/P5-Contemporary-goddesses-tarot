@@ -1,22 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import Card from "./Card";
+import Card from "../components/Card";
 import { getAllCards } from "../services/ApiCards";
+import DateTime from "../components/DateTime";
+import ShowName from "../components/ShowName";
 
 const Deck = () => {
   const [cards, setCards] = useState([]);
   const [selectedCards, setSelectedCards] = useState([]);
   const { state } = useLocation();
   const navigate = useNavigate();
-
-  const playerName = state?.playerName;
-  const lastDate = state?.lastDate || new Date().toLocaleString("es-ES", {
-    day: "2-digit",
-    month: "long",
-    year: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
-  });
 
   useEffect(() => {
     const fetchCards = async () => {
@@ -46,8 +39,8 @@ const Deck = () => {
     <main className="min-h-screen flex flex-col items-center justify-center px-4 py-10">
 
       <section className="flex justify-between w-full mb-8">
-        <p className="text-white text-lg md:text-2xl">¡Hola!, {playerName}!</p>
-        <p className="text-lg md:text-2xl">{lastDate}</p>
+        <p className="text-white text-lg md:text-2xl">¡Hola!, <ShowName/> </p>
+        <p className="text-lg md:text-2xl"><DateTime /></p>
       </section>
 
       <h1 className="text-4xl md:text-5xl mb-10">Escoge tres cartas</h1>
