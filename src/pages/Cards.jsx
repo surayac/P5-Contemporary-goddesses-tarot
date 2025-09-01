@@ -83,7 +83,7 @@ const Cards = () => {
                     Nueva Lectura
                 </button>
                 <button
-                    onClick={() => navigate("/reading", { state })}
+                    onClick={() => navigate("/reading")}
                     className="h-10 px-4 rounded-xl text-black hover:text-white bg-[#FFDBB7] hover:bg-[#5D688A] border border-black cursor-pointer text-xl w-full sm:w-auto"
                 >
                     Qué dicen tus cartas
