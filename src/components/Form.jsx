@@ -20,6 +20,7 @@ function Form({ onSubmit }) {
     });
 
     const newUser = { name, date: today };
+    localStorage.setItem("playerName", name);
 
     if (onSubmit) {
       onSubmit(newUser);
