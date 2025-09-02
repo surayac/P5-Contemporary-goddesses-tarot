@@ -20,7 +20,7 @@ body {
   background-repeat: no-repeat;
 }
 
-h1 {
+h1, h2 { 
   font-family: var(--font-metamorphous);
   color: var(--color-starDust);
 
@@ -45,5 +45,8 @@ button:hover {
 p {
   font-family: var(--font-merriweather);
   color: var(--color-starDust);
-  font-weight: 400;
+  font-weight: 400;}
+
+.font-metamorphous {
+  font-family: var(--font-metamorphous);
 }

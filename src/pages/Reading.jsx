@@ -33,7 +33,7 @@ const Reading = () => {
     return (
         <main className="min-h-screen flex flex-col items-center justify-center px-4 py-10">
             <section className="flex flex-col md:flex-row justify-between w-full mt-10 mb-10">
-                <p className="text-lg md:text-2xl">¡Hola!, <ShowName/>  </p>
+                <p className="text-lg md:text-2xl">¡Hola <ShowName/>! </p>
                 <p className="text-lg md:text-2xl"><DateTime/></p>
             </section>
 
