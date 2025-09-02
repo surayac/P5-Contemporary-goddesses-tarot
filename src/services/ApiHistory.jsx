@@ -13,7 +13,6 @@ export const getHistory = async () => {
   }
 };
 
-
 export const addHistory = async (reading) => {
   try {
     const response = await axios.post(HISTORY_URL, reading);

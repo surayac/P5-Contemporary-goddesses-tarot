@@ -2,6 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ShowName from "../components/ShowName";
 import DateTime from "../components/DateTime";
+import { addHistory } from "../services/ApiHistory";
+
+{/* const navigate = useNavigate(); */}
+
 
 const Reading = () => {
     const [selectedCards, setSelectedCards] = useState([]);
@@ -123,11 +127,17 @@ const Reading = () => {
                     Nueva Lectura
                 </button>
                 <button
-                    onClick={() => navigate("/", { state })}
+                    onClick={async () => {
+                        const createdAt = new Date().toISOString();
+                        const cardIds = [past.id, present.id, future.id];
+                        await addHistory({ createdAt, cards: cardIds });
+                        navigate("/history");
+                    }}
                     className="h-10 px-4 rounded-xl text-black hover:text-white bg-[#FFDBB7] hover:bg-[#5D688A] border border-black cursor-pointer text-xl w-full sm:w-auto"
-                >
+                 >
                     Guardar Lectura
-                </button>
+                    </button>
+
 
             </section>
         </main>

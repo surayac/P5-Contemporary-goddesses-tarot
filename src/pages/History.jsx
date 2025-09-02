@@ -1,154 +1,121 @@
-// src/pages/History.jsx
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import {
+  getHistory,
+  clearAllHistory
+} from "../services/ApiHistory";
+import { getAllCards } from "../services/ApiCards";
 import { useNavigate } from "react-router-dom";
 
-export default function History() {
+const History = () => {
   const [history, setHistory] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
+  const [cards, setCards] = useState([]);
   const navigate = useNavigate();
 
-  
-  const HISTORY_API = "http://localhost:3001/history";
-
-  // URL de tu API de cartas
-  const CARDS_API = "https://6872278c76a5723aacd3cbb3.mockapi.io/api/v1/tarot";
-
-
+  // Cargar historial y cartas al montar el componente
   useEffect(() => {
-    const fetchHistory = async () => {
-      try {
-        setLoading(true);
-        const res = await fetch(HISTORY_API);
-        if (!res.ok) throw new Error("Error cargando historial");
-        const data = await res.json();
-
-        // para cada lectura, traer info de las cartas
-        const fullHistory = await Promise.all(
-          data.map(async (reading) => {
-            const cards = await Promise.all(
-              reading.cards.map(async (id) => {
-                const cardRes = await fetch(`${CARDS_API}/${id}`);
-                return cardRes.json();
-              })
-            );
-            return { ...reading, cards };
-          })
-        );
-
-        setHistory(fullHistory);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
+    const fetchData = async () => {
+      const historyData = await getHistory();
+      const cardsData = await getAllCards();
+      setHistory(historyData);
+      setCards(cardsData);
     };
-
-    fetchHistory();
+    fetchData();
   }, []);
 
-  // Para borrar una lectura
-  const handleDelete = async (id) => {
-    try {
-      await fetch(`${HISTORY_API}/${id}`, { method: "DELETE" });
-      setHistory((prev) => prev.filter((h) => h.id !== id));
-    } catch {
-      alert("Error al borrar la lectura");
-    }
+  // Mapeo de ID a carta
+  const getCardById = (id) => cards.find((card) => card.id === id);
+
+  const handleClearHistory = async () => {
+    await clearAllHistory();
+    setHistory([]);
   };
 
-  // borrar todo el historial
-  const handleClearAll = async () => {
-    if (!confirm("¿Seguro que quieres borrar todo el historial?")) return;
-    try {
-      for (let item of history) {
-        await fetch(`${HISTORY_API}/${item.id}`, { method: "DELETE" });
-      }
-      setHistory([]);
-    } catch {
-      alert("Error al borrar el historial");
-    }
-  };
-
-  // formatear fecha
-  const formatDate = (isoString) => {
-    const date = new Date(isoString);
-    return date.toLocaleString("es-ES", {
-      dateStyle: "short",
-      timeStyle: "short",
-    });
-  };
-
-  if (loading) return <p className="text-center mt-10">Cargando historial...</p>;
-  if (error) return <p className="text-red-500 text-center mt-10">{error}</p>;
+  if (history.length === 0) {
+    return (
+      <main className="min-h-screen flex flex-col items-center justify-center px-4 py-20 text-center">
+        <p className="text-white text-2xl mb-6">No hay lecturas guardadas aún.</p>
+        <button
+          onClick={() => navigate("/deck")}
+          className="h-10 px-6 rounded-xl text-black hover:text-white bg-[#FFDBB7] hover:bg-[#5D688A] border border-black"
+        >
+          Nueva Lectura
+        </button>
+      </main>
+    );
+  }
 
   return (
-    <div className="min-h-screen px-6 py-10 text-neutral-100">
-      <h1 className="text-3xl font-bold text-center mb-8">
-        Tu Historial de Lecturas
-      </h1>
+    <main className="min-h-screen px-4 py-10 text-white">
+      <h1 className="text-3xl font-bold text-center mb-10">Historial de Lecturas</h1>
 
-      {history.length === 0 ? (
-        <p className="text-center text-lg">No hay lecturas guardadas todavía.</p>
-      ) : (
-        <ul className="flex flex-col gap-6">
-          {history.map((reading) => (
-            <li
-              key={reading.id}
-              className="bg-white/10 rounded-xl p-4 shadow-md flex flex-col md:flex-row gap-4"
+      <section className="flex flex-col gap-8">
+        {history.map((entry) => {
+          const date = new Date(entry.createdAt).toLocaleString("es-ES", {
+            day: "2-digit",
+            month: "long",
+            year: "numeric",
+            hour: "2-digit",
+            minute: "2-digit"
+          });
+
+          const selectedCards = entry.cards
+            .map((id) => getCardById(id))
+            .filter(Boolean);
+
+          return (
+            <div
+              key={entry.id}
+              className="grid grid-cols-1 md:grid-cols-[200px_200px_1fr] items-center gap-6 bg-[#1f2937] p-6 rounded-lg shadow-lg"
             >
-              <div className="w-full md:w-1/4">
-                <p className="font-semibold">{formatDate(reading.createdAt)}</p>
+              {/* Columna 1: Fecha */}
+              <div className="text-sm text-center md:text-left font-semibold">
+                <p>{date}</p>
               </div>
 
-              <div className="flex flex-col gap-2 w-full md:w-2/4">
-                {reading.cards.map((card) => (
-                  <div key={card.id} className="flex gap-3 items-start">
-                    <img
-                      src={card.goddessImage.imageSrc}
-                      alt={card.goddessName}
-                      className="w-16 h-24 object-cover rounded-lg"
-                    />
-                    <div>
-                      <p className="font-semibold">{card.arcaneName}</p>
-                      <p className="text-sm">{card.goddessName}</p>
-                      <p className="text-xs opacity-80 mt-1">
-                        {card.arcaneDescription.slice(0, 120)}...
-                      </p>
-                    </div>
-                  </div>
+              {/* Columna 2: Miniaturas */}
+              <div className="flex justify-center gap-2">
+                {selectedCards.map((card) => (
+                  <img
+                    key={card.id}
+                    src={card.arcaneImage.imageSrc}
+                    alt={card.arcaneName}
+                    className="w-16 h-24 object-cover rounded shadow"
+                  />
                 ))}
               </div>
 
-              <div className="flex flex-col justify-between md:w-1/4">
-                <button
-                  onClick={() => handleDelete(reading.id)}
-                  className="bg-red-500/70 hover:bg-red-600 text-white py-1 px-3 rounded-md mb-2"
-                >
-                  Borrar
-                </button>
+              {/* Columna 3: Resumen */}
+              <div className="bg-indigo-900 p-4 rounded text-sm">
+                {selectedCards.map((card) => (
+                  <div key={card.id} className="mb-2">
+                    <h3 className="font-bold">{card.arcaneName}</h3>
+                    <p className="italic">{card.goddessName}</p>
+                    <p className="text-xs mt-1">{card.goddessDescription}</p>
+                  </div>
+                ))}
               </div>
-            </li>
-          ))}
-        </ul>
-      )}
+            </div>
+          );
+        })}
+      </section>
 
-      {history.length > 0 && (
-        <div className="flex justify-center gap-4 mt-8">
-          <button
-            onClick={handleClearAll}
-            className="bg-red-700 hover:bg-red-800 text-white py-2 px-4 rounded-lg"
-          >
-            Borrar todo
-          </button>
-          <button
-            onClick={() => navigate("/")}
-            className="bg-amber-300 hover:bg-amber-400 text-black py-2 px-4 rounded-lg"
-          >
-            Volver al inicio
-          </button>
-        </div>
-      )}
-    </div>
+      {/* Botones finales */}
+      <section className="flex flex-col sm:flex-row justify-center gap-4 mt-12">
+        <button
+          onClick={() => navigate("/deck")}
+          className="h-10 px-6 rounded-xl text-black hover:text-white bg-[#FFDBB7] hover:bg-[#5D688A] border border-black"
+        >
+          Nueva Lectura
+        </button>
+        <button
+          onClick={handleClearHistory}
+          className="h-10 px-6 rounded-xl text-black hover:text-white bg-[#FFDBB7] hover:bg-red-500 border border-black"
+        >
+          Borrar Historial
+        </button>
+      </section>
+    </main>
   );
-}
+};
+
+export default History;
