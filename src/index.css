@@ -1,8 +1,5 @@
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
-
-
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap');
 
 :root {
   --font-metamorphous: "Metamorphous", serif;
@@ -26,7 +23,7 @@ body {
 h1 { 
   font-family: var(--font-metamorphous);
   color: var(--color-starDust);
-  font-size: 16px;
+ 
 }
 
 button {
