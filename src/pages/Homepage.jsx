@@ -22,15 +22,17 @@ export default function Homepage() {
       </section>
       <section className="md:!order-2 order-3 mt-5 px-4">
         <div className="bg-[radial-gradient(circle_at_center,_rgba(255,219,183,0.4),_rgba(20,21,64,0.4))] rounded-3xl
-            px-5 pt-12 pb-12 md:pt-16 md:pb-16 md:px-12 mx-auto mt-8 max-w-[70%] p-5">
-            <p className="text-lg md:text-xl lg:text-2xl text-starDust text-center mb-3">Este es el oráculo de las brujas contemporáneas. </p>
-            <p className="text-lg md:text-xl lg:text-2xl text-starDust text-center mb-3">Elige tres cartas: una que habla de las señales de tu pasado, la central que habla de tu presente
+            px-5 pt-12 pb-12 md:pt-16 md:pb-16 md:px-12 mx-auto mt-8 max-w-[80%] p-5">
+            <div lassName="text-base md:text-xl lg:text-2xl text-starDust text-center">
+            <p className="mb-3">Este es el oráculo de las brujas contemporáneas. </p>
+            <p className="mb-3">Elige tres cartas: una que habla de las señales de tu pasado, la central que habla de tu presente
             y la final que te dirá qué esperar del futuro. </p>
-            <p className="font-merryweather text-lg md:text-xl lg:text-2xl text-starDust text-center mb-3">Cada arcano mayor se manifiesta a través de una mujer del ámbito STEM, elegida como referente y
+            <p className="mb-3">Cada arcano mayor se manifiesta a través de una mujer del ámbito STEM, elegida como referente y
             símbolo de inspiración. </p>
-            <p className=" text-lg md:text-xl lg:text-2xl text-starDust text-center mb-3">Esta experiencia une el lenguaje del tarot con la memoria de quienes transformaron la ciencia y la tecnología. La intención
+            <p className="mb-3">Esta experiencia une el lenguaje del tarot con la memoria de quienes transformaron la ciencia y la tecnología. La intención
             es sembrar curiosidad, aprendizaje y reconocimiento hacia estas figuras.</p>
             </div>
+        </div>  
         
       </section>
 

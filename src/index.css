@@ -20,7 +20,7 @@ body {
   background-repeat: no-repeat;
 }
 
-h1 { 
+h1 h2 { 
   font-family: var(--font-metamorphous);
   color: var(--color-starDust);
  
