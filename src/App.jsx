@@ -8,26 +8,18 @@ import Deck from './pages/Deck'
 import { Routes, Route } from 'react-router-dom'
 import Cards from './pages/Cards'
 import Reading from './pages/Reading'
+import AppRoutes from './application/Router'
 
 function App() {
   return (
     <>
       <Toaster position="top-center" reverseOrder={false} />
       <Header />
-
-      <Routes>
-        <Route path="/" element={<Homepage />} />
-        <Route path="/deck" element={<Deck />} />
-        <Route path="/cards" element={<Cards />} />
-        <Route path="/reading" element={<Reading />} />
-      </Routes>
-      
+      <AppRoutes />
       <Footer />
       
       <ArrowUp />
     </>
   )
 }
-
 export default App
-
