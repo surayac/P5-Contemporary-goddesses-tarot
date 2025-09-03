@@ -14,7 +14,22 @@ const Reading = () => {
     useEffect(() => {
         const stored = JSON.parse(localStorage.getItem("selectedCards"));
         if (stored && stored.length === 3) setSelectedCards(stored);
-    }, []);
+
+        const readingToSave = {
+            createdAt: new Date().toISOString(),
+            cards: stored.map(card => card.id)
+        };
+ 
+        addHistory(readingToSave)
+            .then(response => {
+                console.log('Lectura guardada automáticamente:', response);
+            })
+            .catch(error => {
+                console.error('Error al guardar la lectura:', error);
+            });
+        
+    }, 
+    []);
 
     if (selectedCards.length < 3) {
         return (
