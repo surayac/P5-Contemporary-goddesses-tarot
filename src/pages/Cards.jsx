@@ -16,7 +16,7 @@ const Cards = () => {
         return (
             <main className="min-h-screen flex flex-col items-center justify-center px-4 py-20">
                 <p className="text-white text-xl text-center">
-                    No has seleccionado ningúna carta todavía.
+                    No has seleccionado ninguna carta todavía.
                 </p>
                 <button
                     onClick={() => navigate("/deck")}

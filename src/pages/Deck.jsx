@@ -38,12 +38,12 @@ const Deck = () => {
   return (
     <main className="min-h-screen flex flex-col items-center justify-center px-4 py-10">
 
-      <section className="flex justify-between w-full mb-8">
-        <p className="text-white text-lg md:text-2xl">¡Hola <ShowName/>!</p>
-        <p className="text-lg md:text-2xl"><DateTime /></p>
+      <section className="flex justify-between w-full mb-18 md:mb-24">
+        <p className="text-white text-lg md:text-xl">¡Hola <ShowName/>!</p>
+        <p className="text-lg md:text-xl"><DateTime /></p>
       </section>
 
-      <h1 className="text-4xl md:text-5xl mb-10">Escoge tres cartas</h1>
+      <h1 className="text-3xl md:text-4xl lg:text-5xl text-starDust text-center mb-10">ESCOGE <br className="md:hidden" />TRES CARTAS</h1>
 
       <div className="w-full flex justify-center">
         <div
