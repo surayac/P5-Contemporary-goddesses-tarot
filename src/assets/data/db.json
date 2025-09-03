@@ -1,33 +1,13 @@
 {
   "history": [
     {
-      "id": "8be7",
-      "createdAt": "2025-09-03T15:31:17.043Z",
-      "userName": "suraya",
+      "id": "5cb2",
+      "createdAt": "2025-09-03T16:54:01.290Z",
+      "userName": "eu",
       "cards": [
-        "12",
-        "8",
-        "18"
-      ]
-    },
-    {
-      "id": "5097",
-      "createdAt": "2025-09-03T15:54:18.245Z",
-      "userName": "usuario",
-      "cards": [
-        "18",
-        "2",
-        "5"
-      ]
-    },
-    {
-      "id": "68f6",
-      "createdAt": "2025-09-03T15:57:32.737Z",
-      "userName": "usuario",
-      "cards": [
-        "17",
-        "9",
-        "13"
+        "5",
+        "6",
+        "15"
       ]
     }
   ]

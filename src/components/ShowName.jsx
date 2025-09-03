@@ -1,18 +1,17 @@
+import React from "react";
 import { useEffect, useState } from "react";
 
 const ShowName = () => {
-    const [playerName, setPlayerName] = useState(localStorage.getItem("playerName") || "Usuario");
+    const [name, setName] = useState("");
 
     useEffect(() => {
-        const handleNameChange = (e) => setPlayerName(e.detail);
-        window.addEventListener("playerNameChanged", handleNameChange);
-
-        return () => {
-            window.removeEventListener("playerNameChanged", handleNameChange);
-        };
+        const storedName = localStorage.getItem('name');
+        setName(storedName || 'input name');
     }, []);
 
-    return <span>{playerName}</span>;
+    return (
+        <span>{name}</span>
+    );
 };
 
 export default ShowName;
