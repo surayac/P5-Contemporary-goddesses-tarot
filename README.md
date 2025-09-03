@@ -39,18 +39,19 @@ npm run dev
 # 5. In another terminal tab, start the local JSON Server
 npx json-server --watch src/assets/data/db.json --port 3001
 
+```
 
 ## ⚙️ Tech Stack
 
 | Technology       | Version    | Description                  |
 |------------------|------------|------------------------------|
-| React.js         | 18.2.0     | UI framework                 |
-| Vite             | 4.3.9      | Build tool                   |
+| React.js         | 19.1.0     | UI framework                 |
+| Vite             | 7.1.3      | Build tool                   |
 | Tailwind CSS     | 4.1.12     | Utility-first CSS framework  |
 | JavaScript (ES6) | –          | Logic                        |
 | HTML5 & CSS3     | –          | Markup and styling           |
-| Axios            | 1.6.8      | HTTP requests                |
-| Json-server      | 0.17.4     | Local REST API               |
+| Axios            | 1.11.0     | HTTP requests                |
+| Json-server      | 1.0.0-B3   | Local REST API               |
 | Vitest           | 1.4.0      | Unit testing framework       |
 
 
