@@ -5,25 +5,31 @@ import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 
 const History = () => {
-  const [history, setHistory] = useState([]);
-  const [cards, setCards] = useState([]);
-  const [deletingId, setDeletingId] = useState(null);
-  const navigate = useNavigate();
+    const [history, setHistory] = useState([]);
+    const [cards, setCards] = useState([]);
+    const navigate = useNavigate();
+    const [lastUserName, setLastUserName] = useState(null);
+    const [deletingId, setDeletingId] = useState(null);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const historyData = await getHistory();
-      const cardsData = await getAllCards();
-      setHistory(historyData || []);
-      setCards(cardsData || []);
-    };
-    fetchData();
-  }, []);
+    useEffect(() => {
+        const fetchData = async () => {
+            const historyData = await getHistory();
+            const cardsData = await getAllCards();
+            setHistory(historyData);
+            setCards(cardsData);
 
-  const getCardById = (id) =>
-    cards.find((card) => (card.id ?? card._id) === id);
+            // Obtiene el nombre del usuario de la última entrada
+            if (historyData.length > 0) {
+                const lastEntry = historyData[historyData.length - 1];
+                setLastUserName(lastEntry.userName);
+            }
+        };
+        fetchData();
+    }, []);
 
-  const handleClearHistory = () => {
+    const getCardById = (id) => cards.find((card) => card.id === id);
+
+    const handleClearHistory = () => {
     toast((t) => (
       <div className="flex flex-col gap-2"
         style={{
@@ -39,8 +45,8 @@ const History = () => {
         <div className="flex justify-end gap-2 mt-2">
           <button
             onClick={async () => {
-              await clearAllHistory();
-              setHistory([]);
+                  await clearAllHistory();
+                  setHistory([]);
               toast.dismiss(t.id);
               toast.success("Historial borrado!");
             }}
@@ -119,39 +125,44 @@ const History = () => {
       duration: Infinity,
       style: { background: 'transparent' }
     });
-  };
+        setLastUserName(null); // Borra el nombre al limpiar el historial
+    };
 
-  if (history.length === 0) {
+    if (history.length === 0) {
+        return (
+            <main className="min-h-screen flex flex-col items-center justify-center px-4 py-20 text-center">
+                <p className="text-white text-2xl mb-6">No hay lecturas guardadas aún.</p>
+                <button
+                    onClick={() => navigate("/deck")}
+                    className="h-10 px-6 rounded-xl text-black hover:text-white bg-[#FFDBB7] hover:bg-[#5D688A] border border-black"
+                >
+                    Nueva Lectura
+                </button>
+            </main>
+        );
+    }
+
     return (
-      <main className="min-h-screen flex flex-col items-center justify-center px-4 py-20 text-center">
-        <p className="text-white text-2xl mb-6">No hay lecturas guardadas aún.</p>
-        <button
-          onClick={() => navigate("/deck")}
-          className="h-10 px-6 rounded-xl text-black hover:text-white bg-[#FFDBB7] hover:bg-[#5D688A] border border-black"
-        >
-          Nueva Lectura
-        </button>
-      </main>
-    );
-  }
+        <main className="min-h-screen px-4 py-10 text-white">
+            <h2 className="text-3xl font-bold text-center mb-10">
+                ¡Hola, {lastUserName || "amigo/a"}!
+            </h2>
 
-  return (
-    <main className="min-h-screen px-4 py-10 text-white">
-      <h1 className="text-3xl font-bold text-center mb-10">Historial de Lecturas</h1>
+            <h1 className="text-2xl font-bold text-center mb-10">Tu historial de lecturas</h1>
 
-      <section className="flex flex-col gap-8">
-        {history.map((entry) => {
-          const date = new Date(entry.createdAt).toLocaleString("es-ES", {
-            day: "2-digit",
-            month: "long",
-            year: "numeric",
-            hour: "2-digit",
-            minute: "2-digit",
-          });
+            <section className="flex flex-col gap-8">
+                {history.map((entry) => {
+                    const date = new Date(entry.createdAt).toLocaleString("es-ES", {
+                        day: "2-digit",
+                        month: "long",
+                        year: "numeric",
+                        hour: "2-digit",
+                        minute: "2-digit",
+                    });
 
-          const selectedCards = (entry.cards || [])
-            .map((id) => getCardById(id))
-            .filter(Boolean);
+                    const selectedCards = (entry.cards || [])
+                        .map((id) => getCardById(id))
+                        .filter(Boolean);
 
           return (
             <div
