@@ -1,12 +1,23 @@
+// services/ApiHistory.jsx
 import axios from "axios";
 
-const HISTORY_URL = "http://localhost:3001/history";
+const BASE_URL = import.meta.env?.VITE_API_URL || "http://localhost:3001";
+const HISTORY_PATH = "/history";
 
+const api = axios.create({
+  baseURL: BASE_URL,
+});
+
+const withNormalizedId = (item) => ({
+  ...item,
+  id: item.id ?? item._id, 
+});
 
 export const getHistory = async () => {
   try {
-    const response = await axios.get(HISTORY_URL);
-    return response.data;
+    const { data } = await api.get(HISTORY_PATH);
+    const list = Array.isArray(data) ? data.map(withNormalizedId) : [];
+    return list;
   } catch (error) {
     console.error("Error fetching history:", error);
     return [];
@@ -15,8 +26,8 @@ export const getHistory = async () => {
 
 export const addHistory = async (reading) => {
   try {
-    const response = await axios.post(HISTORY_URL, reading);
-    return response.data;
+    const { data } = await api.post(HISTORY_PATH, reading);
+    return data ? withNormalizedId(data) : null;
   } catch (error) {
     console.error("Error adding history:", error);
     return null;
@@ -24,8 +35,12 @@ export const addHistory = async (reading) => {
 };
 
 export const deleteHistory = async (id) => {
+  if (!id) {
+    console.error("deleteHistory: id ausente/inválido");
+    return false;
+  }
   try {
-    await axios.delete(`${HISTORY_URL}/${id}`);
+    await api.delete(`${HISTORY_PATH}/${id}`);
     return true;
   } catch (error) {
     console.error(`Error deleting history ${id}:`, error);
@@ -36,10 +51,13 @@ export const deleteHistory = async (id) => {
 export const clearAllHistory = async () => {
   try {
     const history = await getHistory();
-    await Promise.all(history.map((h) => deleteHistory(h.id)));
+    await Promise.all(
+      history.map((h) => deleteHistory(h.id)) 
+    );
     return true;
   } catch (error) {
     console.error("Error clearing history:", error);
     return false;
   }
 };
+
