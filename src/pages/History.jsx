@@ -4,6 +4,7 @@ import { getAllCards } from "../services/ApiCards";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import ShowName from "../components/ShowName";
+import CustomToast from "../components/CustomToast";
 
 const History = () => {
   const [history, setHistory] = useState([]);
@@ -25,100 +26,34 @@ const History = () => {
   const getCardById = (id) => cards.find((card) => card.id === id);
 
   const handleClearHistory = () => {
-    toast((t) => (
-      <div className="flex flex-col gap-2"
-        style={{
-          backgroundImage: 'url("src/assets/images/Background.png")',
-          backgroundSize: 'cover',
-          backgroundRepeat: 'no-repeat',
-          border: '5px solid rgba(255,255,255,0.5)',
-          borderRadius: '16px',
-          padding: '16px',
-          boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
-        }}>
-        <p className="p-3">¿Estás seguro que deseas borrar el historial?</p>
-        <div className="flex justify-end gap-2 mt-2">
-          <button
-            onClick={async () => {
-              await clearAllHistory();
-              setHistory([]);
-              toast.dismiss(t.id);
-              toast.success("Historial borrado!");
-            }}
-            className="h-8 p-2 px-4 rounded-xl text-black hover:text-white bg-[#FFDBB7] hover:bg-[#5D688A] cursor-pointer"
-          >
-            Sí, borrar
-          </button>
-          <button
-            onClick={() => toast.dismiss(t.id)}
-            className="h-8 px-4 rounded-xl text-black hover:text-white bg-[#FFDBB7] hover:bg-[#5D688A] cursor-pointer"
-          >
-            Cancelar
-          </button>
-        </div>
-      </div>
-    ),
-      {
-        duration: Infinity,
-        style: {
-          background: 'transparent',
-        }
-      });
+    CustomToast.confirm({
+      message: "¿Estás seguro que deseas borrar el historial?",
+      onConfirm: async () => {
+        await clearAllHistory();
+        setHistory([]);
+        CustomToast.success("Historial borrado!");
+      },
+    });
   };
 
-
   const handleDeleteOne = (id) => {
-    toast((t) => (
-      <div
-        className="flex flex-col gap-2 p-4 text-white"
-        style={{
-          backgroundImage: 'url("src/assets/images/Background.png")',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-          border: '2px solid rgba(255,255,255,0.5)',
-          borderRadius: '16px',
-          boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
-        }}
-      >
-        <p className="font-semibold text-center">
-          ¿Seguro que quieres borrar esta lectura?
-        </p>
-        <div className="flex justify-end gap-2 mt-2">
-          <button
-            onClick={async () => {
-              toast.dismiss(t.id);
-              const prev = history;
-              setDeletingId(id);
-              setHistory((list) => list.filter((h) => h.id !== id));
+    CustomToast.confirm({
+      message: "¿Seguro que quieres borrar esta lectura?",
+      onConfirm: async () => {
+        const prev = history;
+        setDeletingId(id);
+        setHistory((list) => list.filter((h) => h.id !== id));
 
-              try {
-                const success = await deleteHistory(id);
-                if (!success) throw new Error("Fallo al borrar");
-                toast.success("Lectura borrada!");
-              } catch (e) {
-                console.error(e);
-                toast.error("Hubo un problema al borrar. Se restaurará la lista.");
-                setHistory(prev);
-              } finally {
-                setDeletingId(null);
-              }
-            }}
-            className="h-8 px-4 rounded-xl text-black hover:text-white bg-[#FFDBB7] hover:bg-[#5D688A] cursor-pointer"
-          >
-            Sí, borrar
-          </button>
-          <button
-            onClick={() => toast.dismiss(t.id)}
-            className="h-8 px-4 rounded-xl text-black hover:text-white bg-[#FFDBB7] hover:bg-[#5D688A] cursor-pointer"
-          >
-            Cancelar
-          </button>
-        </div>
-      </div>
-    ), {
-      duration: Infinity,
-      style: { background: 'transparent' }
+        try {
+          const success = await deleteHistory(id);
+          CustomToast.success("Lectura borrada!");
+        } catch (e) {
+          CustomToast.error("Problema al borrar. Inténtalo de nuevo.");
+          setHistory(prev);
+        } finally {
+          setDeletingId(null);
+        }
+      },
     });
     setLastUserName(null);
   };
@@ -127,23 +62,17 @@ const History = () => {
     return (
       <main className="min-h-screen flex flex-col items-center justify-center px-4 py-20 text-center">
         <p className="text-white text-2xl mb-6">No hay lecturas guardadas aún.</p>
-        <button
-          onClick={() => navigate("/deck")}
-          className="h-10 px-6 rounded-xl text-black hover:text-white bg-[#FFDBB7] hover:bg-[#5D688A] border border-black cursor-pointer"
-        >
-          Nueva Lectura
-        </button>
+        <button onClick={() => navigate("/deck")}
+          className="h-10 px-6 rounded-xl text-black hover:text-white bg-[#FFDBB7] hover:bg-[#5D688A] border border-black cursor-pointer">
+          Nueva Lectura</button>
       </main>
     );
   }
 
   return (
     <main className="min-h-screen px-4 py-10 text-white">
-      <h2 className="text-3xl font-bold text-center mb-10">
-        ¡Hola, <ShowName />!
-      </h2>
-
-      <h1 className="text-2xl font-bold text-center mb-10">Tu historial de lecturas</h1>
+      <h1 className="font-bold text-center mb-10">¡Hola, <ShowName />!</h1>
+      <h2 className="font-bold text-3xl text-center mb-10">Tu historial de lecturas</h2>
 
       <section className="flex flex-col gap-8">
         {history.map((entry) => {
@@ -163,11 +92,11 @@ const History = () => {
             <section
               key={entry.id}
               className="grid grid-cols-1 md:grid-cols-[120px_auto_1.5fr_100px] items-center gap-2 p-4"            >
-              <div className="text-sm text-center md:text-center font-semibold">
+              <article className="text-sm text-center md:text-center font-semibold">
                 <p>{date}</p>
-              </div>
+              </article>
 
-              <div className="flex justify-center gap-2">
+              <article className="flex justify-center gap-2">
                 {selectedCards.map((card) => (
                   <img
                     key={card.id ?? card._id}
@@ -176,18 +105,18 @@ const History = () => {
                     className="w-30 h-50 object-cover rounded shadow"
                   />
                 ))}
-              </div>
+              </article>
 
-              <div className="bg-[#1C195C] p-4 rounded-lg text-sm">
+              <article className="bg-[#1C195C] p-4 rounded-lg text-sm">
                 {selectedCards.map((card) => (
                   <div key={card.id ?? card._id} className="mb-2">
                     <h3 className="font-bold">{card.arcaneName}</h3>
                     <p className="italic">{card.goddessName}</p>
                   </div>
                 ))}
-              </div>
+              </article>
 
-              <div className="flex justify-center">
+              <article className="flex justify-center">
                 <button
                   onClick={() => handleDeleteOne(entry.id)}
                   disabled={deletingId === entry.id}
@@ -199,23 +128,20 @@ const History = () => {
                 >
                   {deletingId === entry.id ? "Borrando…" : "Borrar"}
                 </button>
-              </div>
+              </article>
             </section>
           );
         })}
       </section>
 
       <section className="flex flex-col sm:flex-row justify-center gap-4 mt-12">
-        <button
-          onClick={() => navigate("/deck")}
-          className="h-10 px-6 rounded-xl text-black hover:text-white bg-[#FFDBB7] hover:bg-[#5D688A] border border-black cursor-pointer"
-        >
+        <button onClick={() => navigate("/deck")}
+          className="h-10 px-6 rounded-xl text-black hover:text-white bg-[#FFDBB7] hover:bg-[#5D688A] border border-black cursor-pointer">
           Nueva Lectura
         </button>
-        <button
-          onClick={handleClearHistory}
-          className="h-10 px-6 rounded-xl text-black hover:text-white bg-[#FFDBB7] hover:bg-[#5D688A] border border-black cursor-pointer"
-        >
+
+        <button onClick={handleClearHistory}
+          className="h-10 px-6 rounded-xl text-black hover:text-white bg-[#FFDBB7] hover:bg-[#5D688A] border border-black cursor-pointer">
           Borrar Historial
         </button>
       </section>
