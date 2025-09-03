@@ -42,7 +42,7 @@ const Cards = () => {
                 <section className="flex flex-col gap-4 mb-5">
                     <h2 className="text-lg text-center md:text-center">Pasado</h2>
                     <article className="flex flex-col items-center gap-4">
-                        <div className="w-50 h-70 overflow-hidden rounded-lg shadow-lg">
+                        <div className="w-50 h-80 overflow-hidden rounded-lg shadow-lg">
                             <img
                                 src={past.arcaneImage.imageSrc}
                                 alt={past.arcaneName}
@@ -50,7 +50,7 @@ const Cards = () => {
                             />
                         </div>
 
-                        <div className="bg-indigo-950 text-white p-4 rounded-lg shadow-lg w-full max-w-xs">
+                        <div className="bg-indigo-950 text-white p-4 rounded-lg shadow-lg w-full max-w-[300px]">
                             <h3 className="font-bold">{past.arcaneName}</h3>
                             <p className="text-sm mt-2">{past.arcaneDescription}</p>
                         </div>
@@ -60,7 +60,7 @@ const Cards = () => {
                 <section className="flex flex-col gap-4 mb-5">
                     <h2 className="text-lg text-center md:text-center">Presente</h2>
                     <article className="flex flex-col items-center gap-4">
-                        <div className="w-50 h-70 overflow-hidden rounded-lg shadow-lg">
+                        <div className="w-50 h-80 overflow-hidden rounded-lg shadow-lg">
                             <img
                                 src={present.arcaneImage.imageSrc}
                                 alt={present.arcaneName}
@@ -68,7 +68,7 @@ const Cards = () => {
                             />
                         </div>
 
-                        <div className="bg-indigo-950 text-white p-4 rounded-lg shadow-lg w-full max-w-xs">
+                        <div className="bg-indigo-950 text-white p-4 rounded-lg shadow-lg w-full max-w-[300px]">
                             <h3 className="font-bold">{present.arcaneName}</h3>
                             <p className="text-sm mt-2">{present.arcaneDescription}</p>
                         </div>
@@ -78,7 +78,7 @@ const Cards = () => {
                 <section className="flex flex-col gap-4 mb-5">
                     <h2 className="text-lg text-center md:text-center">Futuro</h2>
                     <article className="flex flex-col items-center gap-4">
-                        <div className="w-50 h-70 overflow-hidden rounded-lg shadow-lg">
+                        <div className="w-50 h-80 overflow-hidden rounded-lg shadow-lg">
                             <img
                                 src={future.arcaneImage.imageSrc}
                                 alt={future.arcaneName}
@@ -86,7 +86,7 @@ const Cards = () => {
                             />
                         </div>
 
-                        <div className="bg-indigo-950 text-white p-4 rounded-lg shadow-lg w-full max-w-xs">
+                        <div className="bg-indigo-950 text-white p-4 rounded-lg shadow-lg w-full max-w-[300px]">
                             <h3 className="font-bold">{future.arcaneName}</h3>
                             <p className="text-sm mt-2">{future.arcaneDescription}</p>
                         </div>
