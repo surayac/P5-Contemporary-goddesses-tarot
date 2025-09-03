@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DateTime from "../components/DateTime";
 import ShowName from "../components/ShowName";
+import { addHistory } from "../services/ApiHistory";
+
 
 
 const Cards = () => {
