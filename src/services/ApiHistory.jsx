@@ -33,7 +33,7 @@ export const deleteHistory = async (id) => {
   }
 };
 
-export const clearHistory = async () => {
+export const clearAllHistory = async () => {
   try {
     const history = await getHistory();
     await Promise.all(history.map((h) => deleteHistory(h.id)));

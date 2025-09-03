@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  getHistory,
+import {  getHistory,
   clearAllHistory
 } from "../services/ApiHistory";
 import { getAllCards } from "../services/ApiCards";
@@ -11,7 +10,7 @@ const History = () => {
   const [cards, setCards] = useState([]);
   const navigate = useNavigate();
 
-  // Cargar historial y cartas al montar el componente
+  
   useEffect(() => {
     const fetchData = async () => {
       const historyData = await getHistory();
@@ -22,7 +21,7 @@ const History = () => {
     fetchData();
   }, []);
 
-  // Mapeo de ID a carta
+ 
   const getCardById = (id) => cards.find((card) => card.id === id);
 
   const handleClearHistory = async () => {

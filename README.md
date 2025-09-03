@@ -25,31 +25,41 @@ Users can:
 
    ```bash
    git clone https://github.com/surayac/P5-Contemporary-goddesses-tarot
-
    ```
+2. Move into the project directory:
 
-2. Install dependencies:
+   ```bash
+  cd P5-Contemporary-goddesses-tarot
+  ```
+3. Install dependencies:
+
    ```bash
    npm install
    ```
-3. Access the page through your browser:
+4. Access the page through your browser:
+
    ```bash
    npm run dev
+   ```
+5. Start the local JSON Server (in anohter terminal):
+
+   ```bash 
+   npx json-server --watch src/assets/data/db.json --port 3001
    ```
 
 ## ⚙️ Tech Stack
 
-React.js + Vite (UI & app logic)
+| Technology       | Version    | Description                  |
+|------------------|------------|------------------------------|
+| React.js         | 18.2.0     | UI framework                 |
+| Vite             | 4.3.9      | Build tool                   |
+| Tailwind CSS     | 4.1.12     | Utility-first CSS framework  |
+| JavaScript (ES6) | –          | Logic                        |
+| HTML5 & CSS3     | –          | Markup and styling           |
+| Axios            | 1.6.8      | HTTP requests                |
+| Json-server      | 0.17.4     | Local REST API               |
+| Vitest           | 1.4.0      | Unit testing framework       |
 
-JavaScript (ES6+)
-
-HTML5 & CSS3
-
-Axios (API requests)
-
-Json-server (local persistence)
-
-Vitest (unit testing)
 
 ## 🛠 Tools
 
