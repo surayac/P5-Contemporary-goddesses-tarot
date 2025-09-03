@@ -5,7 +5,7 @@ Our goal is to honor and highlight women who are leading and innovating in field
 
 ## 🔍 Sneak Peek
 
-Screenshot (once ready)
+![Homepage and Deck Preview](./src/assets/sneak-peak.png)
 
 ## 🧠 How It Works
 
@@ -21,35 +21,39 @@ Users can:
 
 ## How to use it:
 
-1. Clone repository:
+## 🚀 How to Run the Project Locally
 
-   ```bash
-   git clone https://github.com/surayac/P5-Contemporary-goddesses-tarot
+```bash
+# 1. Clone the repository
+git clone https://github.com/surayac/P5-Contemporary-goddesses-tarot
 
-   ```
+# 2. Move into the project directory
+cd P5-Contemporary-goddesses-tarot
 
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-3. Access the page through your browser:
-   ```bash
-   npm run dev
-   ```
+# 3. Install the dependencies
+npm install
+
+# 4. Start the development server
+npm run dev
+
+# 5. In another terminal tab, start the local JSON Server
+npx json-server --watch src/assets/data/db.json --port 3001
+
+```
 
 ## ⚙️ Tech Stack
 
-React.js + Vite (UI & app logic)
+| Technology       | Version    | Description                  |
+|------------------|------------|------------------------------|
+| React.js         | 19.1.0     | UI framework                 |
+| Vite             | 7.1.3      | Build tool                   |
+| Tailwind CSS     | 4.1.12     | Utility-first CSS framework  |
+| JavaScript (ES6) | –          | Logic                        |
+| HTML5 & CSS3     | –          | Markup and styling           |
+| Axios            | 1.11.0     | HTTP requests                |
+| Json-server      | 1.0.0-B3   | Local REST API               |
+| Vitest           | 1.4.0      | Unit testing framework       |
 
-JavaScript (ES6+)
-
-HTML5 & CSS3
-
-Axios (API requests)
-
-Json-server (local persistence)
-
-Vitest (unit testing)
 
 ## 🛠 Tools
 
