@@ -3,7 +3,6 @@ import { Toaster } from 'react-hot-toast'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import Homepage from './pages/Homepage'
-import ArrowUp from './components/ArrowUp'
 import Deck from './pages/Deck'
 import { Routes, Route } from 'react-router-dom'
 import Cards from './pages/Cards'
@@ -18,7 +17,7 @@ function App() {
       <AppRoutes />
       <Footer />
       
-      <ArrowUp />
+      
     </>
   )
 }
