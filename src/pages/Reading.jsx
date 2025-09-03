@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import ShowName from "../components/ShowName";
 import DateTime from "../components/DateTime";
 import { addHistory } from "../services/ApiHistory";
+import toast, { Toaster } from "react-hot-toast";
 
 const Reading = () => {
     const [selectedCards, setSelectedCards] = useState([]);
@@ -31,10 +32,39 @@ const Reading = () => {
         addHistory(readingToSave)
             .then(() => {
                 setIsSaved(true);
-                alert('¡Lectura guardada en el historial!');
+
+                toast((t) => (
+                    <div
+                        className="flex flex-col gap-3 text-white"
+                        style={{
+                            backgroundImage: 'url("src/assets/images/Background.png")',
+                            backgroundSize: "cover",
+                            backgroundPosition: "center",
+                            border: "2px solid rgba(255,255,255,0.5)",
+                            borderRadius: "16px",
+                            padding: "16px",
+                            boxShadow: "0 4px 12px rgba(0,0,0,0.3)",
+                        }}
+                    >
+                        <p className="font-semibold text-center">
+                            ¡Lectura guardada en el historial!
+                        </p>
+                        <div className="flex justify-center gap-2 mt-2">
+                            <button
+                                onClick={() => toast.dismiss(t.id)}
+                                className="h-8 px-4 rounded-xl text-black hover:text-white bg-[#FFDBB7] hover:bg-[#5D688A] cursor-pointer"
+                            >
+                                OK
+                            </button>
+                        </div>
+                    </div>
+                ), {
+                    duration: Infinity,
+                    style: { background: "transparent" },
+                });
             })
             .catch((err) => {
-                alert('Error al guardar la lectura.');
+                toast.error("Error al guardar la lectura.");
                 console.error(err);
             });
     };

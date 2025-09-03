@@ -134,7 +134,7 @@ const History = () => {
                 <p className="text-white text-2xl mb-6">No hay lecturas guardadas aún.</p>
                 <button
                     onClick={() => navigate("/deck")}
-                    className="h-10 px-6 rounded-xl text-black hover:text-white bg-[#FFDBB7] hover:bg-[#5D688A] border border-black"
+                    className="h-10 px-6 rounded-xl text-black hover:text-white bg-[#FFDBB7] hover:bg-[#5D688A] border border-black cursor-pointer"
                 >
                     Nueva Lectura
                 </button>
