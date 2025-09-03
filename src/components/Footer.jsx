@@ -5,9 +5,9 @@ import whatsapp from "../../src/assets/whatsapp.png"
 
 function Footer() {
     return (
-        <footer className="bottom-0 left-0 mt-10 mb-5 w-full h-full ">
+        <footer className="bottom-0 left-0 pr-4 pl-4 mt-10 mb-5 w-full h-full ">
             <div className="max-w-7xl mx-auto flex flex-col-reverse md:flex-row items-center justify-between gap-4">
-                <p className="text-center text-xs md:text-lg md:text-right text-white">
+                <p className="text-center text-xs md:text-sm md:text-right text-white">
                     © 2025. Todos los derechos reservados.
                 </p>
                 <div className="flex gap-3 md:gap-9">

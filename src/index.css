@@ -41,3 +41,7 @@ p {
   font-family: var(--font-merriweather);
   color: var(--color-starDust);
   font-weight: 400;}
+
+.font-metamorphous {
+  font-family: var(--font-metamorphous);
+}

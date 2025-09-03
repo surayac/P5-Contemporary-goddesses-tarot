@@ -20,10 +20,10 @@ export default function Homepage() {
            EL PORTAL DE <br className="md:hidden" /> LAS ARCANAS
         </h1>
       </section>
-      <section className="md:!order-2 order-3 mt-5 px-4">
+      <section className="sm:!order-2 order-3 mt-5 px-4">
         <div className="bg-[radial-gradient(circle_at_center,_rgba(255,219,183,0.4),_rgba(20,21,64,0.4))] rounded-3xl
             px-5 pt-12 pb-12 md:pt-16 md:pb-16 md:px-12 mx-auto mt-8 max-w-[80%] p-5">
-            <div lassName="text-base md:text-xl lg:text-2xl text-starDust text-center">
+            <div className="text-base md:text-xl lg:text-2xl text-starDust text-center">
             <p className="mb-3">Este es el oráculo de las brujas contemporáneas. </p>
             <p className="mb-3">Elige tres cartas: una que habla de las señales de tu pasado, la central que habla de tu presente
             y la final que te dirá qué esperar del futuro. </p>
@@ -36,7 +36,7 @@ export default function Homepage() {
         
       </section>
 
-      <section className="md:!order-3 order-2 mt-10 md:mb-10 w-full px-20">
+      <section className="sm:!order-3 order-2 mt-10 md:mb-10 w-full px-20">
         <Form onSubmit={handleSubmit} />
       </section>
    

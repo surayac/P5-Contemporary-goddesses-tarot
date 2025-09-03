@@ -39,7 +39,7 @@ const Deck = () => {
     <main className="min-h-screen flex flex-col items-center justify-center px-4 py-10">
 
       <section className="flex justify-between w-full mb-8">
-        <p className="text-white text-lg md:text-2xl">¡Hola!, <ShowName/> </p>
+        <p className="text-white text-lg md:text-2xl">¡Hola <ShowName/>!</p>
         <p className="text-lg md:text-2xl"><DateTime /></p>
       </section>
 
