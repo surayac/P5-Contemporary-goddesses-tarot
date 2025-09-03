@@ -5,31 +5,31 @@ import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 
 const History = () => {
-    const [history, setHistory] = useState([]);
-    const [cards, setCards] = useState([]);
-    const navigate = useNavigate();
-    const [lastUserName, setLastUserName] = useState(null);
-    const [deletingId, setDeletingId] = useState(null);
+  const [history, setHistory] = useState([]);
+  const [cards, setCards] = useState([]);
+  const navigate = useNavigate();
+  const [lastUserName, setLastUserName] = useState(null);
+  const [deletingId, setDeletingId] = useState(null);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            const historyData = await getHistory();
-            const cardsData = await getAllCards();
-            setHistory(historyData);
-            setCards(cardsData);
+  useEffect(() => {
+    const fetchData = async () => {
+      const historyData = await getHistory();
+      const cardsData = await getAllCards();
+      setHistory(historyData);
+      setCards(cardsData);
 
-            // Obtiene el nombre del usuario de la última entrada
-            if (historyData.length > 0) {
-                const lastEntry = historyData[historyData.length - 1];
-                setLastUserName(lastEntry.userName);
-            }
-        };
-        fetchData();
-    }, []);
+      // Obtiene el nombre del usuario de la última entrada
+      if (historyData.length > 0) {
+        const lastEntry = historyData[historyData.length - 1];
+        setLastUserName(lastEntry.userName);
+      }
+    };
+    fetchData();
+  }, []);
 
-    const getCardById = (id) => cards.find((card) => card.id === id);
+  const getCardById = (id) => cards.find((card) => card.id === id);
 
-    const handleClearHistory = () => {
+  const handleClearHistory = () => {
     toast((t) => (
       <div className="flex flex-col gap-2"
         style={{
@@ -45,8 +45,8 @@ const History = () => {
         <div className="flex justify-end gap-2 mt-2">
           <button
             onClick={async () => {
-                  await clearAllHistory();
-                  setHistory([]);
+              await clearAllHistory();
+              setHistory([]);
               toast.dismiss(t.id);
               toast.success("Historial borrado!");
             }}
@@ -125,51 +125,50 @@ const History = () => {
       duration: Infinity,
       style: { background: 'transparent' }
     });
-        setLastUserName(null);
-    };
+    setLastUserName(null);
+  };
 
-    if (history.length === 0) {
-        return (
-            <main className="min-h-screen flex flex-col items-center justify-center px-4 py-20 text-center">
-                <p className="text-white text-2xl mb-6">No hay lecturas guardadas aún.</p>
-                <button
-                    onClick={() => navigate("/deck")}
-                    className="h-10 px-6 rounded-xl text-black hover:text-white bg-[#FFDBB7] hover:bg-[#5D688A] border border-black cursor-pointer"
-                >
-                    Nueva Lectura
-                </button>
-            </main>
-        );
-    }
-
+  if (history.length === 0) {
     return (
-        <main className="min-h-screen px-4 py-10 text-white">
-            <h2 className="text-3xl font-bold text-center mb-10">
-                ¡Hola, {lastUserName || "amigo/a"}!
-            </h2>
+      <main className="min-h-screen flex flex-col items-center justify-center px-4 py-20 text-center">
+        <p className="text-white text-2xl mb-6">No hay lecturas guardadas aún.</p>
+        <button
+          onClick={() => navigate("/deck")}
+          className="h-10 px-6 rounded-xl text-black hover:text-white bg-[#FFDBB7] hover:bg-[#5D688A] border border-black cursor-pointer"
+        >
+          Nueva Lectura
+        </button>
+      </main>
+    );
+  }
 
-            <h1 className="text-2xl font-bold text-center mb-10">Tu historial de lecturas</h1>
+  return (
+    <main className="min-h-screen px-4 py-10 text-white">
+      <h2 className="text-3xl font-bold text-center mb-10">
+        ¡Hola, {lastUserName || "amigo/a"}!
+      </h2>
 
-            <section className="flex flex-col gap-8">
-                {history.map((entry) => {
-                    const date = new Date(entry.createdAt).toLocaleString("es-ES", {
-                        day: "2-digit",
-                        month: "long",
-                        year: "numeric",
-                        hour: "2-digit",
-                        minute: "2-digit",
-                    });
+      <h1 className="text-2xl font-bold text-center mb-10">Tu historial de lecturas</h1>
 
-                    const selectedCards = (entry.cards || [])
-                        .map((id) => getCardById(id))
-                        .filter(Boolean);
+      <section className="flex flex-col gap-8">
+        {history.map((entry) => {
+          const date = new Date(entry.createdAt).toLocaleString("es-ES", {
+            day: "2-digit",
+            month: "long",
+            year: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
+          });
+
+          const selectedCards = (entry.cards || [])
+            .map((id) => getCardById(id))
+            .filter(Boolean);
 
           return (
-            <div
+            <section
               key={entry.id}
-              className="grid grid-cols-1 md:grid-cols-[200px_200px_1fr_auto] items-center gap-6 bg-[#6E76AC] p-6 rounded-lg shadow-lg"
-            >
-              <div className="text-sm text-center md:text-left font-semibold">
+              className="grid grid-cols-1 md:grid-cols-[120px_auto_1.5fr_100px] items-center gap-2 p-4"            >
+              <div className="text-sm text-center md:text-center font-semibold">
                 <p>{date}</p>
               </div>
 
@@ -179,12 +178,12 @@ const History = () => {
                     key={card.id ?? card._id}
                     src={card.arcaneImage.imageSrc}
                     alt={card.arcaneName}
-                    className="w-16 h-24 object-cover rounded shadow"
+                    className="w-30 h-50 object-cover rounded shadow"
                   />
                 ))}
               </div>
 
-              <div className="bg-indigo-900 p-4 rounded text-sm">
+              <div className="bg-[#1C195C] p-4 rounded-lg text-sm">
                 {selectedCards.map((card) => (
                   <div key={card.id ?? card._id} className="mb-2">
                     <h3 className="font-bold">{card.arcaneName}</h3>
@@ -197,16 +196,16 @@ const History = () => {
                 <button
                   onClick={() => handleDeleteOne(entry.id)}
                   disabled={deletingId === entry.id}
-                  className={`h-10 px-4 rounded-xl border border-black
+                  className={`h-8 px-4 rounded-xl border border-black
                     ${deletingId === entry.id
                       ? "bg-gray-300 text-gray-600 cursor-not-allowed"
-                      : "text-black hover:text-white bg-[#FFDBB7] hover:bg-[#6E76AC] cursor-pointer"
+                      : "text-black text-sm hover:text-white bg-[#FFDBB7] hover:bg-[#6E76AC] cursor-pointer"
                     }`}
                 >
                   {deletingId === entry.id ? "Borrando…" : "Borrar"}
                 </button>
               </div>
-            </div>
+            </section>
           );
         })}
       </section>
