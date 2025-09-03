@@ -5,7 +5,7 @@
   --font-metamorphous: "Metamorphous", serif;
   --font-merriweather: "Merriweather", serif;
 
-  --bg-image: url("/src/assets/Background.png");
+  --bg-image: url("/src/assets/images/Background.png");
 
   --color-bgDark: #141540;
   --color-starDust: #ffdbb7;
@@ -20,7 +20,7 @@ body {
   background-repeat: no-repeat;
 }
 
-h1, h2 { 
+h1 { 
   font-family: var(--font-metamorphous);
   color: var(--color-starDust);
 
@@ -42,7 +42,7 @@ button:hover {
   transition: background-color 0.3s, color 0.3s;
 }
 
-p {
+h3, p {
   font-family: var(--font-merriweather);
   color: var(--color-starDust);
   font-weight: 400;}

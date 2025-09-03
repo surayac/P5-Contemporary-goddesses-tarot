@@ -1,4 +1,4 @@
-import logo from '../../src/assets/logo.webp'
+import logo from '../../src/assets/images/logo.webp'
 
 function Header() {
   return (
@@ -14,7 +14,7 @@ function Header() {
               className="md:hover:drop-shadow-[0_0_8px_#FFDBB7] active:drop-shadow-[0_0_8px_#FFDBB7] active:scale-110 hover:scale-110 transition-all duration-300" >
             INICIO
             </a>
-            <a href="/Favorites" 
+            <a href="/History" 
               className="md:hover:drop-shadow-[0_0_8px_#FFDBB7] active:drop-shadow-[0_0_8px_#FFDBB7] active:scale-110 hover:scale-110 transition-all duration-300" >
             HISTORIAL
             </a>

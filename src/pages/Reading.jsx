@@ -1,20 +1,35 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ShowName from "../components/ShowName";
 import DateTime from "../components/DateTime";
 import { addHistory } from "../services/ApiHistory";
 
-{/* const navigate = useNavigate(); */}
-
 
 const Reading = () => {
-    const [selectedCards, setSelectedCards] = useState([]);
-    const navigate = useNavigate();
+  const [selectedCards, setSelectedCards] = useState([]);
+  const hasSaved = useRef(false); // <- fusible
+  const navigate = useNavigate();
 
-    useEffect(() => {
-        const stored = JSON.parse(localStorage.getItem("selectedCards"));
-        if (stored && stored.length === 3) setSelectedCards(stored);
-    }, []);
+  useEffect(() => {
+    const storedRaw = localStorage.getItem("selectedCards");
+    const stored = storedRaw ? JSON.parse(storedRaw) : null;
+
+    if (stored?.length === 3) setSelectedCards(stored);
+
+    // evita guardar dos veces en StrictMode
+    if (!hasSaved.current && stored?.length === 3) {
+      hasSaved.current = true;
+
+      const readingToSave = {
+        createdAt: new Date().toISOString(),
+        cards: stored.map((card) => card.id),
+      };
+
+      addHistory(readingToSave)
+        .then((res) => console.log("Lectura guardada automáticamente:", res))
+        .catch((err) => console.error("Error al guardar la lectura:", err));
+    }
+  }, []);
 
     if (selectedCards.length < 3) {
         return (
@@ -127,12 +142,8 @@ const Reading = () => {
                     Nueva Lectura
                 </button>
                 <button
-                    onClick={async () => {
-                        const createdAt = new Date().toISOString();
-                        const cardIds = [past.id, present.id, future.id];
-                        await addHistory({ createdAt, cards: cardIds });
-                        navigate("/history");
-                    }}
+                    onClick={() => navigate("/history")}
+                    
                     className="h-10 px-4 rounded-xl text-black hover:text-white bg-[#FFDBB7] hover:bg-[#5D688A] border border-black cursor-pointer text-xl w-full sm:w-auto"
                  >
                     Guardar Lectura
