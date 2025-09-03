@@ -12,8 +12,6 @@ export const getAllCards = async () => {
   }
 };
 
-//Estoy agregando esto para poder obtener varias cartas por un array → En la prueba que hago no interviene con lo que tienen mis compis.
-
 export const getCardById = async (id) => {
   try {
     const response = await axios.get(`${API_URL}/${id}`);

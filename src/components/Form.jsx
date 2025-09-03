@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Toaster, toast } from "react-hot-toast";
 
@@ -20,7 +19,7 @@ function Form({ onSubmit }) {
     });
 
     const newUser = { name, date: today };
-    localStorage.setItem("playerName", name);
+    localStorage.setItem("name", name);
 
     if (onSubmit) {
       onSubmit(newUser);
@@ -57,4 +56,3 @@ function Form({ onSubmit }) {
 }
 
 export default Form;
-
