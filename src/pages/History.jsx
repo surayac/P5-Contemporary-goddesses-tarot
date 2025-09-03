@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { getHistory, clearAllHistory, deleteHistory } from "../services/ApiHistory";
 import { getAllCards } from "../services/ApiCards";
 import { useNavigate } from "react-router-dom";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
+import ShowName from "../components/ShowName";
 
 const History = () => {
   const [history, setHistory] = useState([]);
@@ -17,12 +18,6 @@ const History = () => {
       const cardsData = await getAllCards();
       setHistory(historyData);
       setCards(cardsData);
-
-      // Obtiene el nombre del usuario de la última entrada
-      if (historyData.length > 0) {
-        const lastEntry = historyData[historyData.length - 1];
-        setLastUserName(lastEntry.userName);
-      }
     };
     fetchData();
   }, []);
@@ -145,7 +140,7 @@ const History = () => {
   return (
     <main className="min-h-screen px-4 py-10 text-white">
       <h2 className="text-3xl font-bold text-center mb-10">
-        ¡Hola, {lastUserName || "amigo/a"}!
+        ¡Hola, <ShowName />!
       </h2>
 
       <h1 className="text-2xl font-bold text-center mb-10">Tu historial de lecturas</h1>
