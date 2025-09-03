@@ -6,7 +6,7 @@ const ShowName = () => {
 
     useEffect(() => {
         const storedName = localStorage.getItem('playerName');
-        setPlayerName(storedName || 'input name');
+        setPlayerName(storedName || 'Anónimo');
     }, []);
 
     return (
