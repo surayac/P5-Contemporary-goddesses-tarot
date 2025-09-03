@@ -64,7 +64,7 @@ const History = () => {
           return (
             <div
               key={entry.id}
-              className="grid grid-cols-1 md:grid-cols-[200px_200px_1fr] items-center gap-6 bg-[#1f2937] p-6 rounded-lg shadow-lg"
+              className="grid grid-cols-1 md:grid-cols-[200px_200px_1fr] items-center gap-6 bg-[#6E76AC] p-6 rounded-lg shadow-lg"
             >
               {/* Columna 1: Fecha */}
               <div className="text-sm text-center md:text-left font-semibold">
@@ -83,16 +83,16 @@ const History = () => {
                 ))}
               </div>
 
-              {/* Columna 3: Resumen */}
+             {/* Columna 3: Resumen */}
               <div className="bg-indigo-900 p-4 rounded text-sm">
-                {selectedCards.map((card) => (
+               {selectedCards.map((card) => (
                   <div key={card.id} className="mb-2">
                     <h3 className="font-bold">{card.arcaneName}</h3>
                     <p className="italic">{card.goddessName}</p>
-                    <p className="text-xs mt-1">{card.goddessDescription}</p>
-                  </div>
-                ))}
-              </div>
+                    </div>
+                  ))}
+            </div>
+
             </div>
           );
         })}
