@@ -92,7 +92,7 @@ const History = () => {
         <div className="flex justify-end gap-2 mt-2">
           <button
             onClick={async () => {
-              toast.dismiss(t.id); // fecha o toast
+              toast.dismiss(t.id);
               const prev = history;
               setDeletingId(id);
               setHistory((list) => list.filter((h) => h.id !== id));
@@ -109,7 +109,7 @@ const History = () => {
                 setDeletingId(null);
               }
             }}
-            className="h-8 px-4 rounded-xl text-black hover:text-white bg-[#FFDBB7] hover:bg-red-600 cursor-pointer"
+            className="h-8 px-4 rounded-xl text-black hover:text-white bg-[#FFDBB7] hover:bg-[#5D688A] cursor-pointer"
           >
             Sí, borrar
           </button>
@@ -125,7 +125,7 @@ const History = () => {
       duration: Infinity,
       style: { background: 'transparent' }
     });
-        setLastUserName(null); // Borra el nombre al limpiar el historial
+        setLastUserName(null);
     };
 
     if (history.length === 0) {
