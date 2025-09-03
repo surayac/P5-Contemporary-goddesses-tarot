@@ -1,9 +1,9 @@
-import logo from '../../src/assets/logo.webp'
+import logo from '../../src/assets/images/logo.webp'
 
 function Header() {
   return (
     <>
-      <header className="top-0 left-0 w-full z-50 shadow-md">
+      <header className="sticky top-0 left-0 w-full z-50 shadow-md">
         <nav className="flex justify-between items-center px-2 md:px-5 py-3 mx-2 md:mx-4 relative">
             <a href="/" aria-label="Home"> 
                 <img src={logo} alt="Logo" 

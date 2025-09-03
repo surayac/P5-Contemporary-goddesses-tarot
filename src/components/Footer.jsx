@@ -1,6 +1,6 @@
-import instagram from "../../src/assets/instagram.png"
-import tiktok from "../../src/assets/tiktok.png"
-import whatsapp from "../../src/assets/whatsapp.png"
+import instagram from "../../src/assets/images/instagram.png"
+import tiktok from "../../src/assets/images/tiktok.png"
+import whatsapp from "../../src/assets/images/whatsapp.png"
 
 
 function Footer() {

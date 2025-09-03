@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import backImage from "../assets/card.png";
+import backImage from "../assets/images/card.png";
 
 const Card = ({ card, isSelected = false, onClick }) => {
  
