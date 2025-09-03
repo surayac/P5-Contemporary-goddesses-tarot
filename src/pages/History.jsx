@@ -66,24 +66,59 @@ const History = () => {
   };
 
 
-  const handleDeleteOne = async (id) => {
-    const ok = window.confirm("¿Seguro que quieres borrar esta lectura?");
-    if (!ok) return;
+  const handleDeleteOne = (id) => {
+    toast((t) => (
+      <div
+        className="flex flex-col gap-2 p-4 text-white"
+        style={{
+          backgroundImage: 'url("src/assets/images/Background.png")',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          border: '2px solid rgba(255,255,255,0.5)',
+          borderRadius: '16px',
+          boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
+        }}
+      >
+        <p className="font-semibold text-center">
+          ¿Seguro que quieres borrar esta lectura?
+        </p>
+        <div className="flex justify-end gap-2 mt-2">
+          <button
+            onClick={async () => {
+              toast.dismiss(t.id); // fecha o toast
+              const prev = history;
+              setDeletingId(id);
+              setHistory((list) => list.filter((h) => h.id !== id));
 
-    const prev = history;
-    setDeletingId(id);
-    setHistory((list) => list.filter((h) => h.id !== id));
-
-    try {
-      const success = await deleteHistory(id);
-      if (!success) throw new Error("Fallo al borrar");
-    } catch (e) {
-      console.error(e);
-      alert("Hubo un problema al borrar. Se restaurará la lista.");
-      setHistory(prev);
-    } finally {
-      setDeletingId(null);
-    }
+              try {
+                const success = await deleteHistory(id);
+                if (!success) throw new Error("Fallo al borrar");
+                toast.success("Lectura borrada!");
+              } catch (e) {
+                console.error(e);
+                toast.error("Hubo un problema al borrar. Se restaurará la lista.");
+                setHistory(prev);
+              } finally {
+                setDeletingId(null);
+              }
+            }}
+            className="h-8 px-4 rounded-xl text-black hover:text-white bg-[#FFDBB7] hover:bg-red-600 cursor-pointer"
+          >
+            Sí, borrar
+          </button>
+          <button
+            onClick={() => toast.dismiss(t.id)}
+            className="h-8 px-4 rounded-xl text-black hover:text-white bg-[#FFDBB7] hover:bg-[#5D688A] cursor-pointer"
+          >
+            Cancelar
+          </button>
+        </div>
+      </div>
+    ), {
+      duration: Infinity,
+      style: { background: 'transparent' }
+    });
   };
 
   if (history.length === 0) {
@@ -154,7 +189,7 @@ const History = () => {
                   className={`h-10 px-4 rounded-xl border border-black
                     ${deletingId === entry.id
                       ? "bg-gray-300 text-gray-600 cursor-not-allowed"
-                      : "text-black hover:text-white bg-[#FFDBB7] hover:bg-red-600"
+                      : "text-black hover:text-white bg-[#FFDBB7] hover:bg-[#6E76AC] cursor-pointer"
                     }`}
                 >
                   {deletingId === entry.id ? "Borrando…" : "Borrar"}
@@ -168,13 +203,13 @@ const History = () => {
       <section className="flex flex-col sm:flex-row justify-center gap-4 mt-12">
         <button
           onClick={() => navigate("/deck")}
-          className="h-10 px-6 rounded-xl text-black hover:text-white bg-[#FFDBB7] hover:bg-[#5D688A] border border-black"
+          className="h-10 px-6 rounded-xl text-black hover:text-white bg-[#FFDBB7] hover:bg-[#5D688A] border border-black cursor-pointer"
         >
           Nueva Lectura
         </button>
         <button
           onClick={handleClearHistory}
-          className="h-10 px-6 rounded-xl text-black hover:text-white bg-[#FFDBB7] hover:bg-[#5D688A] border border-black"
+          className="h-10 px-6 rounded-xl text-black hover:text-white bg-[#FFDBB7] hover:bg-[#5D688A] border border-black cursor-pointer"
         >
           Borrar Historial
         </button>
