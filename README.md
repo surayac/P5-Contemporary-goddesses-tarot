@@ -5,7 +5,7 @@ Our goal is to honor and highlight women who are leading and innovating in field
 
 ## 🔍 Sneak Peek
 
-Screenshot (once ready)
+![Homepage and Deck Preview](./src/assets/sneak-peak.png)
 
 ## 🧠 How It Works
 
@@ -21,31 +21,24 @@ Users can:
 
 ## How to use it:
 
-1. Clone repository:
+## 🚀 How to Run the Project Locally
 
-   ```bash
-   git clone https://github.com/surayac/P5-Contemporary-goddesses-tarot
-   ```
-2. Move into the project directory:
+```bash
+# 1. Clone the repository
+git clone https://github.com/surayac/P5-Contemporary-goddesses-tarot
 
-   ```bash
-  cd P5-Contemporary-goddesses-tarot
-  ```
-3. Install dependencies:
+# 2. Move into the project directory
+cd P5-Contemporary-goddesses-tarot
 
-   ```bash
-   npm install
-   ```
-4. Access the page through your browser:
+# 3. Install the dependencies
+npm install
 
-   ```bash
-   npm run dev
-   ```
-5. Start the local JSON Server (in anohter terminal):
+# 4. Start the development server
+npm run dev
 
-   ```bash 
-   npx json-server --watch src/assets/data/db.json --port 3001
-   ```
+# 5. In another terminal tab, start the local JSON Server
+npx json-server --watch src/assets/data/db.json --port 3001
+
 
 ## ⚙️ Tech Stack
 
