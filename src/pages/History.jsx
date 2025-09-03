@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {  getHistory,
-  clearAllHistory
-} from "../services/ApiHistory";
+import { getHistory, clearAllHistory } from "../services/ApiHistory";
 import { getAllCards } from "../services/ApiCards";
 import { useNavigate } from "react-router-dom";
 

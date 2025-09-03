@@ -1,35 +1,35 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ShowName from "../components/ShowName";
 import DateTime from "../components/DateTime";
 import { addHistory } from "../services/ApiHistory";
 
 
-
-
 const Reading = () => {
-    const [selectedCards, setSelectedCards] = useState([]);
-    const navigate = useNavigate();
+  const [selectedCards, setSelectedCards] = useState([]);
+  const hasSaved = useRef(false); // <- fusible
+  const navigate = useNavigate();
 
-    useEffect(() => {
-        const stored = JSON.parse(localStorage.getItem("selectedCards"));
-        if (stored && stored.length === 3) setSelectedCards(stored);
+  useEffect(() => {
+    const storedRaw = localStorage.getItem("selectedCards");
+    const stored = storedRaw ? JSON.parse(storedRaw) : null;
 
-        const readingToSave = {
-            createdAt: new Date().toISOString(),
-            cards: stored.map(card => card.id)
-        };
- 
-        addHistory(readingToSave)
-            .then(response => {
-                console.log('Lectura guardada automáticamente:', response);
-            })
-            .catch(error => {
-                console.error('Error al guardar la lectura:', error);
-            });
-        
-    }, 
-    []);
+    if (stored?.length === 3) setSelectedCards(stored);
+
+    // evita guardar dos veces en StrictMode
+    if (!hasSaved.current && stored?.length === 3) {
+      hasSaved.current = true;
+
+      const readingToSave = {
+        createdAt: new Date().toISOString(),
+        cards: stored.map((card) => card.id),
+      };
+
+      addHistory(readingToSave)
+        .then((res) => console.log("Lectura guardada automáticamente:", res))
+        .catch((err) => console.error("Error al guardar la lectura:", err));
+    }
+  }, []);
 
     if (selectedCards.length < 3) {
         return (
