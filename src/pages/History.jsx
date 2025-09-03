@@ -103,6 +103,7 @@ const History = () => {
               className="grid grid-cols-1 md:grid-cols-[120px_auto_1.5fr_100px] items-center gap-2 p-4"            >
               <div className="text-sm text-center md:text-center font-semibold">
                 <p>{date}</p>
+                <p className="text-xs text-gray-300 mt-1">{entry.userName}</p>
               </div>
 
               <div className="flex justify-center gap-2">
