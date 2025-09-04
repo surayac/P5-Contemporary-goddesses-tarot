@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import ShowName from "../components/ShowName";
 import DateTime from "../components/DateTime";
 import { addHistory } from "../services/ApiHistory";
-import toast from "react-hot-toast";
+import CustomToast from "../components/CustomToast";
 
 const Reading = () => {
   const [selectedCards, setSelectedCards] = useState([]);
@@ -32,10 +32,10 @@ const Reading = () => {
     addHistory(readingToSave)
       .then(() => {
         setIsSaved(true);
-        toast.success("¡Lectura guardada en el historial!");
+        CustomToast.success("¡Lectura guardada en el historial!");
       })
       .catch((err) => {
-        toast.error("Error al guardar la lectura.");
+        CustomToast.error("Error al guardar la lectura.");
         console.error(err);
       });
   };

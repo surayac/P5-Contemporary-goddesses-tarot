@@ -41,8 +41,54 @@ const CustomToast = {
     });
   },
 
-  success: (message) => toast.success(message),
-  error: (message) => toast.error(message),
+  success: (message) => toast(
+    <div
+      className="flex flex-col gap-2 p-4 text-white"
+      style={{
+        backgroundImage: 'url("src/assets/images/Background.png")',
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        border: "2px solid rgba(255,255,255,0.5)",
+        borderRadius: "16px",
+        boxShadow: "0 4px 12px rgba(0,0,0,0.3)",
+      }}
+    >
+      <p className="font-semibold text-center">{message}</p>
+    </div>,
+    {      
+      style: {
+        background: "transparent",
+        boxShadow: "none",
+        padding: 0,
+      },
+    }
+  ),
+
+  error: (message) => toast(
+    <div
+      className="flex flex-col gap-2 p-4 text-white"
+      style={{
+        backgroundImage: 'url("src/assets/images/Background.png")',
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        border: "2px solid rgba(255,255,255,0.5)",
+        borderRadius: "16px",
+        boxShadow: "0 4px 12px rgba(0,0,0,0.3)",
+      }}
+    >
+      <p className="font-semibold text-center"><span className="text-red-500">❌</span>
+      {message}</p>
+    </div>,
+    {      
+      style: {
+        background: "transparent",
+        boxShadow: "none",
+        padding: 0,
+      },
+    }
+  ),
 };
 
 export default CustomToast;
