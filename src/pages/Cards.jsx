@@ -33,19 +33,19 @@ const Cards = () => {
 
   return (
     <main className="min-h-screen flex flex-col items-center justify-center px-4 py-10">
-      {/* Header */}
+    
       <section className="flex flex-col md:flex-row justify-between w-full mt-10 mb-10">
         <p className="text-lg md:text-2xl">¡Hola <ShowName />! </p>
         <p className="text-lg md:text-2xl"><DateTime /></p>
       </section>
 
-      {/* Contenedor de las 3 cartas */}
+    
       <section className="flex flex-col md:flex-row gap-8 w-full justify-center">
-        {/* Pasado */}
+        
         <section className="flex flex-row md:flex-col items-center md:items-center text-center gap-4 w-full md:w-auto">
-          {/* Título en desktop */}
+        
           <h2 className="hidden md:block text-lg font-bold">Pasado</h2>
-          {/* Imagen */}
+        
           <div className="w-32 h-48 md:w-50 md:h-80 overflow-hidden rounded-lg shadow-lg flex-shrink-0 mx-auto">
             <img
               src={past.arcaneImage.imageSrc}
@@ -53,16 +53,16 @@ const Cards = () => {
               className="w-full h-full object-cover"
             />
           </div>
-          {/* Texto */}
+        
           <div className="bg-indigo-950 text-white p-4 rounded-lg shadow-lg w-full md:max-w-[300px] text-center">
-            {/* Título en móvil */}
+         
             <h2 className="block md:hidden text-lg font-bold mb-1">Pasado</h2>
             <h3 className="font-semibold">{past.arcaneName}</h3>
             <p className="text-sm mt-2">{past.arcaneDescription}</p>
           </div>
         </section>
 
-        {/* Presente */}
+       
         <section className="flex flex-row md:flex-col items-center md:items-center text-center gap-4 w-full md:w-auto">
           <h2 className="hidden md:block text-lg font-bold">Presente</h2>
           <div className="w-32 h-48 md:w-50 md:h-80 overflow-hidden rounded-lg shadow-lg flex-shrink-0 mx-auto">
@@ -79,7 +79,6 @@ const Cards = () => {
           </div>
         </section>
 
-        {/* Futuro */}
         <section className="flex flex-row md:flex-col items-center md:items-center text-center gap-4 w-full md:w-auto">
           <h2 className="hidden md:block text-lg font-bold">Futuro</h2>
           <div className="w-32 h-48 md:w-50 md:h-80 overflow-hidden rounded-lg shadow-lg flex-shrink-0 mx-auto">
@@ -97,7 +96,7 @@ const Cards = () => {
         </section>
       </section>
 
-      {/* Botones */}
+      
       <section className="flex flex-col md:flex-row gap-4 mt-10">
         <button
           onClick={() => navigate("/deck")}
