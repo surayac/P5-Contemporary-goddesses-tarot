@@ -5,7 +5,7 @@ Our goal is to honor and highlight women who are leading and innovating in field
 
 ## 🔍 Sneak Peek
 
-![Homepage and Deck Preview](./src/assets/images/sneak-peak.png.png)
+![Homepage and Deck Preview](./src/assets/images/sneak-peak.png)
 
 ## 🧠 How It Works
 
