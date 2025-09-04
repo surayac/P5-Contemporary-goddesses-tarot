@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getHistory, clearAllHistory, deleteHistory } from "../services/ApiHistory";
+import { getHistory, clearAllHistory, deleteHistory, updateHistoryName } from "../services/ApiHistory";
 import { getAllCards } from "../services/ApiCards";
 import { useNavigate } from "react-router-dom";
 import ShowName from "../components/ShowName";
@@ -9,8 +9,10 @@ const History = () => {
   const [history, setHistory] = useState([]);
   const [cards, setCards] = useState([]);
   const navigate = useNavigate();
-  const [lastUserName, setLastUserName] = useState(null);
   const [deletingId, setDeletingId] = useState(null);
+
+  const [editingId, setEditingId] = useState(null);
+  const [editedName, setEditedName] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -35,7 +37,6 @@ const History = () => {
     });
   };
 
-
   const handleDeleteOne = (id) => {
     const prev = history;
 
@@ -58,8 +59,30 @@ const History = () => {
         }
       },
     });
+  };
 
-    setLastUserName(null);
+  const startEditing = (id, currentName) => {
+    setEditingId(id);
+    setEditedName(currentName);
+  };
+
+  const handleSaveName = async (id) => {
+    if (!editedName.trim()) return;
+
+    try {
+      await updateHistoryName(id, editedName);
+
+      setHistory(prev =>
+        prev.map(entry => entry.id === id ? { ...entry, userName: editedName } : entry)
+      );
+
+      setEditingId(null);
+      setEditedName("");
+      CustomToast.success("Nombre actualizado!");
+    } catch (err) {
+      console.error(err);
+      CustomToast.error("No se pudo actualizar el nombre.");
+    }
   };
 
   if (history.length === 0) {
@@ -79,7 +102,8 @@ const History = () => {
   return (
     <main className="min-h-screen px-4 py-10 text-white">
       <h1 className="text-3xl font-bold text-center mb-10">
-        ¡Hola, <ShowName />!</h1>
+        ¡Hola, <ShowName />!
+      </h1>
 
       <h2 className="text-2xl font-bold text-center mb-10">Tu historial de lecturas</h2>
 
@@ -93,17 +117,30 @@ const History = () => {
             minute: "2-digit",
           });
 
-          const selectedCards = (entry.cards || [])
-            .map((id) => getCardById(id))
-            .filter(Boolean);
+          const selectedCards = (entry.cards || []).map((id) => getCardById(id)).filter(Boolean);
 
           return (
-            <section
-              key={entry.id}
-              className="grid grid-cols-1 md:grid-cols-[120px_auto_1.5fr_100px] items-center gap-2 p-4"            >
+            <section key={entry.id} className="grid grid-cols-1 md:grid-cols-[120px_auto_1.5fr_100px] items-center gap-2 p-4">
               <div className="text-sm text-center md:text-center font-semibold">
                 <p>{date}</p>
-                <p className="text-xs text-gray-300 mt-1">{entry.userName}</p>
+                {editingId === entry.id ? (
+                  <input
+                    type="text"
+                    value={editedName}
+                    onChange={(e) => setEditedName(e.target.value)}
+                    onBlur={() => handleSaveName(entry.id)}
+                    onKeyDown={(e) => e.key === "Enter" && handleSaveName(entry.id)}
+                    className= "w-30 px-2 py-1 rounded bg-[#7B88B0]/60 text-white placeholder:text-white text-center text-sm"
+                    autoFocus
+                  />
+                ) : (
+                  <p
+                    className="text-s text-gray-300 mt-1 cursor-pointer hover:underline"
+                    onClick={() => startEditing(entry.id, entry.userName)}
+                  >
+                    {entry.userName}
+                  </p>
+                )}
               </div>
 
               <div className="flex justify-center gap-2">

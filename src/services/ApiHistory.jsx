@@ -1,4 +1,3 @@
-// services/ApiHistory.jsx
 import axios from "axios";
 
 const BASE_URL = import.meta.env?.VITE_API_URL || "http://localhost:3001";
@@ -10,7 +9,7 @@ const api = axios.create({
 
 const withNormalizedId = (item) => ({
   ...item,
-  id: item.id ?? item._id, 
+  id: item.id ?? item._id,
 });
 
 export const getHistory = async () => {
@@ -52,7 +51,7 @@ export const clearAllHistory = async () => {
   try {
     const history = await getHistory();
     await Promise.all(
-      history.map((h) => deleteHistory(h.id)) 
+      history.map((h) => deleteHistory(h.id))
     );
     return true;
   } catch (error) {
@@ -61,3 +60,15 @@ export const clearAllHistory = async () => {
   }
 };
 
+export const updateHistoryName = async (id, newName) => {
+  try {
+    const { data: entry } = await api.get(`${HISTORY_PATH}/${id}`);
+    const updatedEntry = { ...entry, userName: newName };
+    const response = await api.put(`${HISTORY_PATH}/${id}`, updatedEntry);
+
+    return response.data;
+  } catch (err) {
+    console.error("Error updating history name:", err);
+    throw err;
+  }
+};
