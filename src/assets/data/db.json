@@ -1,33 +1,23 @@
 {
   "history": [
     {
-      "id": "5cb2",
-      "createdAt": "2025-09-03T16:54:01.290Z",
-      "userName": "eu",
+      "id": "c6a8",
+      "createdAt": "2025-09-03T23:10:37.463Z",
+      "userName": "Stef",
       "cards": [
-        "5",
-        "6",
-        "15"
-      ]
-    },
-    {
-      "id": "f14c",
-      "createdAt": "2025-09-03T16:58:41.745Z",
-      "userName": "Suraya",
-      "cards": [
-        "5",
-        "7",
-        "1"
-      ]
-    },
-    {
-      "id": "4c9c",
-      "createdAt": "2025-09-03T17:01:54.927Z",
-      "userName": "Dani",
-      "cards": [
+        "1",
         "12",
-        "4",
-        "9"
+        "20"
+      ]
+    },
+    {
+      "id": "3ca9",
+      "createdAt": "2025-09-04T00:03:45.863Z",
+      "userName": "Stef",
+      "cards": [
+        "20",
+        "18",
+        "16"
       ]
     }
   ]
