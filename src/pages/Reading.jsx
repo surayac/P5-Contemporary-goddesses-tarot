@@ -66,20 +66,16 @@ const Reading = () => {
 
   return (
     <main className="min-h-screen flex flex-col items-center justify-center px-4 py-10">
-      {/* Header */}
       <section className="flex flex-col md:flex-row justify-between w-full max-w-6xl mx-auto mt-10 mb-10">
         <p className="text-lg md:text-2xl">¡Hola <ShowName />!</p>
         <p className="text-lg md:text-2xl"><DateTime /></p>
       </section>
 
-      {/* Secciones para cada carta */}
       {cardsData.map((item, idx) => (
         <section key={idx} className="flex flex-col gap-4 mb-10 w-full max-w-6xl mx-auto">
           <h2 className="text-lg text-center md:text-left">{item.title}</h2>
 
-          {/* Contenedor principal */}
           <article className="flex flex-col md:flex-row gap-6 items-center md:items-start">
-            {/* Imágenes */}
             <div className="flex flex-row gap-4 justify-center md:flex-row md:flex-none">
               <div className="w-36 h-52 md:w-40 md:h-60 overflow-hidden rounded-lg shadow-lg flex-shrink-0">
                 <img
@@ -97,7 +93,6 @@ const Reading = () => {
               </div>
             </div>
 
-            {/* Texto */}
             <div className="bg-indigo-950 text-white p-4 rounded-lg shadow-lg flex-1 md:max-w-[60%] text-center md:text-left">
               <h3 className="font-bold">{item.data.arcaneName}</h3>
               <p className="italic">{item.data.goddessName}</p>
@@ -107,24 +102,23 @@ const Reading = () => {
         </section>
       ))}
 
-      {/* Botones */}
-      <section className="flex flex-col md:flex-row gap-4 mt-10 w-full max-w-6xl mx-auto px-4">
+      <section className="flex flex-col justify-center md:flex-row gap-4 mt-10 w-full max-w-6xl mx-auto px-4">
         <button
           onClick={() => navigate("/deck")}
-          className="h-10 px-4 rounded-xl text-black hover:text-white bg-[#FFDBB7] hover:bg-[#5D688A] border border-black cursor-pointer text-xl w-full sm:w-auto"
+          className="h-10 px-4 rounded-xl text-black hover:text-white bg-[#FFDBB7] hover:bg-[#5D688A] border border-black cursor-pointer text-l w-full sm:w-auto"
         >
           Nueva Lectura
         </button>
         <button
           onClick={handleSaveReading}
-          className="h-10 px-4 rounded-xl text-black hover:text-white bg-[#FFDBB7] hover:bg-[#5D688A] border border-black cursor-pointer text-xl w-full sm:w-auto"
+          className="h-10 px-4 rounded-xl text-black hover:text-white bg-[#FFDBB7] hover:bg-[#5D688A] border border-black cursor-pointer text-l w-full sm:w-auto"
           disabled={isSaved}
         >
           {isSaved ? "Lectura Guardada" : "Guardar Lectura"}
         </button>
         <button
           onClick={() => navigate("/history")}
-          className="h-10 px-4 rounded-xl text-black hover:text-white bg-[#FFDBB7] hover:bg-[#5D688A] border border-black cursor-pointer text-xl w-full sm:w-auto"
+          className="h-10 px-4 rounded-xl text-black hover:text-white bg-[#FFDBB7] hover:bg-[#5D688A] border border-black cursor-pointer text-l w-full sm:w-auto"
         >
           Ver tu historial
         </button>
