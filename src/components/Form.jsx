@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Toaster, toast } from "react-hot-toast";
 
@@ -57,4 +56,3 @@ function Form({ onSubmit }) {
 }
 
 export default Form;
-

@@ -16,7 +16,7 @@ export default function Homepage() {
   
     <main className="flex flex-col mb-10">
       <section className="order-1 text-center">
-        <h1 className="font-metamorphous text-3xl md:text-4xl lg:text-5xl text-starDust drop-shadow-[0_0_8px_#FFDBB7]">
+        <h1 className="mt-15 font-metamorphous text-3xl md:text-4xl lg:text-5xl text-starDust drop-shadow-[0_0_8px_#FFDBB7]">
            EL PORTAL DE <br className="md:hidden" /> LAS ARCANAS
         </h1>
       </section>

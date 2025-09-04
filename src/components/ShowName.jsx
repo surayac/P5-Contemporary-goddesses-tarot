@@ -2,15 +2,15 @@ import React from "react";
 import { useEffect, useState } from "react";
 
 const ShowName = () => {
-    const [playerName, setPlayerName] = useState("");
+    const [name, setName] = useState("");
 
     useEffect(() => {
-        const storedName = localStorage.getItem('playerName');
-        setPlayerName(storedName || 'input name');
+        const storedName = localStorage.getItem('name');
+        setName(storedName || 'input name');
     }, []);
 
     return (
-        <span>{playerName}</span>
+        <span>{name}</span>
     );
 };
 

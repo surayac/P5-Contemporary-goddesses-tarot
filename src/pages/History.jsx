@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { getHistory, clearAllHistory, deleteHistory } from "../services/ApiHistory";
 import { getAllCards } from "../services/ApiCards";
 import { useNavigate } from "react-router-dom";
-import toast from "react-hot-toast";
 import ShowName from "../components/ShowName";
+import CustomToast from "../components/CustomToast";
 
 const History = () => {
   const [history, setHistory] = useState([]);
@@ -25,101 +25,40 @@ const History = () => {
   const getCardById = (id) => cards.find((card) => card.id === id);
 
   const handleClearHistory = () => {
-    toast((t) => (
-      <div className="flex flex-col gap-2"
-        style={{
-          backgroundImage: 'url("src/assets/images/Background.png")',
-          backgroundSize: 'cover',
-          backgroundRepeat: 'no-repeat',
-          border: '5px solid rgba(255,255,255,0.5)',
-          borderRadius: '16px',
-          padding: '16px',
-          boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
-        }}>
-        <p className="p-3">¿Estás seguro que deseas borrar el historial?</p>
-        <div className="flex justify-end gap-2 mt-2">
-          <button
-            onClick={async () => {
-              await clearAllHistory();
-              setHistory([]);
-              toast.dismiss(t.id);
-              toast.success("Historial borrado!");
-            }}
-            className="h-8 p-2 px-4 rounded-xl text-black hover:text-white bg-[#FFDBB7] hover:bg-[#5D688A] cursor-pointer"
-          >
-            Sí, borrar
-          </button>
-          <button
-            onClick={() => toast.dismiss(t.id)}
-            className="h-8 px-4 rounded-xl text-black hover:text-white bg-[#FFDBB7] hover:bg-[#5D688A] cursor-pointer"
-          >
-            Cancelar
-          </button>
-        </div>
-      </div>
-    ),
-      {
-        duration: Infinity,
-        style: {
-          background: 'transparent',
-        }
-      });
+    CustomToast.confirm({
+      message: "¿Estás seguro que deseas borrar el historial?",
+      onConfirm: async () => {
+        await clearAllHistory();
+        setHistory([]);
+        CustomToast.success("Historial borrado!");
+      },
+    });
   };
 
 
   const handleDeleteOne = (id) => {
-    toast((t) => (
-      <div
-        className="flex flex-col gap-2 p-4 text-white"
-        style={{
-          backgroundImage: 'url("src/assets/images/Background.png")',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-          border: '2px solid rgba(255,255,255,0.5)',
-          borderRadius: '16px',
-          boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
-        }}
-      >
-        <p className="font-semibold text-center">
-          ¿Seguro que quieres borrar esta lectura?
-        </p>
-        <div className="flex justify-end gap-2 mt-2">
-          <button
-            onClick={async () => {
-              toast.dismiss(t.id);
-              const prev = history;
-              setDeletingId(id);
-              setHistory((list) => list.filter((h) => h.id !== id));
+    const prev = history;
 
-              try {
-                const success = await deleteHistory(id);
-                if (!success) throw new Error("Fallo al borrar");
-                toast.success("Lectura borrada!");
-              } catch (e) {
-                console.error(e);
-                toast.error("Hubo un problema al borrar. Se restaurará la lista.");
-                setHistory(prev);
-              } finally {
-                setDeletingId(null);
-              }
-            }}
-            className="h-8 px-4 rounded-xl text-black hover:text-white bg-[#FFDBB7] hover:bg-[#5D688A] cursor-pointer"
-          >
-            Sí, borrar
-          </button>
-          <button
-            onClick={() => toast.dismiss(t.id)}
-            className="h-8 px-4 rounded-xl text-black hover:text-white bg-[#FFDBB7] hover:bg-[#5D688A] cursor-pointer"
-          >
-            Cancelar
-          </button>
-        </div>
-      </div>
-    ), {
-      duration: Infinity,
-      style: { background: 'transparent' }
+    CustomToast.confirm({
+      message: "¿Seguro que quieres borrar esta lectura?",
+      onConfirm: async () => {
+        setDeletingId(id);
+        setHistory((list) => list.filter((h) => h.id !== id));
+
+        try {
+          const success = await deleteHistory(id);
+          if (!success) throw new Error("Fallo al borrar");
+          CustomToast.success("Lectura borrada!");
+        } catch (e) {
+          console.error(e);
+          CustomToast.error("Hubo un problema al borrar. Se restaurará la lista.");
+          setHistory(prev);
+        } finally {
+          setDeletingId(null);
+        }
+      },
     });
+
     setLastUserName(null);
   };
 
@@ -139,11 +78,10 @@ const History = () => {
 
   return (
     <main className="min-h-screen px-4 py-10 text-white">
-      <h2 className="text-3xl font-bold text-center mb-10">
-        ¡Hola, <ShowName />!
-      </h2>
+      <h1 className="text-3xl font-bold text-center mb-10">
+        ¡Hola, <ShowName />!</h1>
 
-      <h1 className="text-2xl font-bold text-center mb-10">Tu historial de lecturas</h1>
+      <h2 className="text-2xl font-bold text-center mb-10">Tu historial de lecturas</h2>
 
       <section className="flex flex-col gap-8">
         {history.map((entry) => {
@@ -165,6 +103,7 @@ const History = () => {
               className="grid grid-cols-1 md:grid-cols-[120px_auto_1.5fr_100px] items-center gap-2 p-4"            >
               <div className="text-sm text-center md:text-center font-semibold">
                 <p>{date}</p>
+                <p className="text-xs text-gray-300 mt-1">{entry.userName}</p>
               </div>
 
               <div className="flex justify-center gap-2">

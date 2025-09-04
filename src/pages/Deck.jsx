@@ -5,12 +5,14 @@ import { getAllCards } from "../services/ApiCards";
 import DateTime from "../components/DateTime";
 import ShowName from "../components/ShowName";
 
-
 const Deck = () => {
   const [cards, setCards] = useState([]);
   const [selectedCards, setSelectedCards] = useState([]);
   const { state } = useLocation();
   const navigate = useNavigate();
+
+  const [cardWidth, setCardWidth] = useState(60);
+  const [cardOverlap, setCardOverlap] = useState(30); 
 
   useEffect(() => {
     const fetchCards = async () => {
@@ -18,14 +20,29 @@ const Deck = () => {
         const data = await getAllCards();
         setCards(data.sort(() => Math.random() - 0.5));
       } catch (err) {
-        console.error("Error al buscar cartas:", err);
+        console.error("Error fetching cards:", err);
       }
     };
     fetchCards();
   }, []);
 
+  useEffect(() => {
+    const updateCardSizes = () => {
+      const maxWidth = window.innerWidth;
+      const numberOfCards = 11;
+      const overlapFactor = 0.5; 
+      const width = maxWidth / (numberOfCards - overlapFactor);
+      setCardWidth(width);
+      setCardOverlap(width * overlapFactor);
+    };
+
+    updateCardSizes();
+    window.addEventListener("resize", updateCardSizes);
+    return () => window.removeEventListener("resize", updateCardSizes);
+  }, []);
+
   const handleCardClick = (card) => {
-    if (selectedCards.find(c => c.id === card.id) || selectedCards.length >= 3) return;
+    if (selectedCards.find((c) => c.id === card.id) || selectedCards.length >= 3) return;
 
     const newSelected = [...selectedCards, card];
     setSelectedCards(newSelected);
@@ -36,48 +53,60 @@ const Deck = () => {
     }
   };
 
-  return (
-    <main className="min-h-screen flex flex-col items-center justify-center px-4 py-10">
+  const renderRow = (cardsSlice, marginTop = 0) => {
+    return (
+      <section
+        className="flex justify-center relative"
+        style={{ marginTop: `${marginTop}px` }}
+      >
+        {cardsSlice.map((card, index) => {
+          const isSelected = selectedCards.find((c) => c.id === card.id);
+          return (
+            <article
+              key={card.id || index}
+              className={`transition-transform duration-200 cursor-pointer ${
+                isSelected
+                  ? "-translate-y-4 md:-translate-y-6"
+                  : "hover:-translate-y-1 md:hover:-translate-y-2 hover:z-20 focus-within:-translate-y-1"
+              }`}
+              style={{
+                width: `${cardWidth}px`,
+                marginLeft: index === 0 ? 0 : `-${cardOverlap}px`,
+                zIndex: isSelected ? 30 : index,
+              }}
+              onClick={() => handleCardClick(card)}
+            >
+              <Card card={card} />
+            </article>
+          );
+        })}
+      </section>
+    );
+  };
 
-      <section className="flex justify-between w-full mb-8">
-        <p className="text-white text-lg md:text-2xl">¡Hola <ShowName/>!</p>
-        <p className="text-lg md:text-2xl"><DateTime /></p>
+  if (!cards || cards.length < 22) {
+    return (
+      <main className="min-h-screen flex items-center justify-center">
+        <p>Loading cards...</p>
+      </main>
+    );
+  }
+
+  return (
+    <main className="min-h-screen flex flex-col items-center  px-4 py-10">
+      <section className="flex justify-between w-full mb-18 md:mb-24">
+        <p className="text-white text-lg md:text-xl">¡Hola <ShowName />!</p>
+        <p className="text-lg md:text-xl"><DateTime /></p>
       </section>
 
-      <h1 className="text-4xl md:text-5xl mb-10">Escoge tres cartas</h1>
+      <h1 className="text-3xl md:text-4xl lg:text-5xl text-starDust text-center mb-10">
+        ESCOGE <br className="md:hidden" /> TRES CARTAS
+      </h1>
 
-      <div className="w-full flex justify-center">
-        <div
-          className="inline-flex relative"
-          style={{ ["--overlap"]: "clamp(59px, calc(100vw / 24), 88px)" }}
-        >
-          {cards.map((card, index) => {
-            const isSelected = selectedCards.find(c => c.id === card.id);
-            return (
-              <div
-                key={card.id}
-                style={{
-                  marginLeft: index === 0 ? 0 : "calc(var(--overlap) * -1)",
-                  zIndex: isSelected ? 30 : index,
-                }}
-                className={`transition-transform duration-200 cursor-pointer ${isSelected
-                  ? "-translate-y-10"
-                  : "hover:-translate-y-2 hover:z-20 hover:scale-[1.02] focus-within:-translate-y-2 focus-within:z-20"
-                  }`}
-                onClick={() => handleCardClick(card)}
-              >
-                <Card
-                  card={
-                    isSelected
-                      ? { ...card, arcaneImage: { ...card.arcaneImage } }
-                      : card
-                  }
-                />
-              </div>
-            );
-          })}
-        </div>
-      </div>
+      {}
+      {renderRow(cards.slice(0, 11), 0)}
+      {}
+      {renderRow(cards.slice(11, 22), cardWidth * 1.2)}
     </main>
   );
 };
