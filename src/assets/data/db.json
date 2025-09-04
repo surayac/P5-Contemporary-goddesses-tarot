@@ -1,3 +1,14 @@
 {
-  "history": []
+  "history": [
+    {
+      "id": "5671",
+      "createdAt": "2025-09-04T06:14:26.750Z",
+      "userName": "Erika",
+      "cards": [
+        "4",
+        "9",
+        "12"
+      ]
+    }
+  ]
 }
