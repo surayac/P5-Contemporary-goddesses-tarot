@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { Toaster, toast } from "react-hot-toast";
+import CustomToast from "../components/CustomToast";
+
 
 function Form({ onSubmit }) {
   const [name, setName] = useState("");
