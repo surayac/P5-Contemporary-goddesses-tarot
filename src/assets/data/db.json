@@ -1,8 +1,74 @@
 {
-    "name": [
-        {
-        "id": "1",
-        "name": "Atenea"
-        }
-    ]
+  "history": [
+    {
+      "id": "c7a6",
+      "createdAt": "2025-09-04T08:46:57.657Z",
+      "userName": "suraya",
+      "cards": [
+        "16",
+        "5",
+        "11"
+      ]
+    },
+    {
+      "id": "4cdd",
+      "createdAt": "2025-09-04T08:47:44.097Z",
+      "userName": "Stef",
+      "cards": [
+        "7",
+        "12",
+        "6"
+      ]
+    },
+    {
+      "id": "2a85",
+      "createdAt": "2025-09-04T08:48:11.151Z",
+      "userName": "Dani",
+      "cards": [
+        "18",
+        "21",
+        "17"
+      ]
+    },
+    {
+      "id": "c266",
+      "createdAt": "2025-09-04T08:57:31.105Z",
+      "userName": "suraya",
+      "cards": [
+        "2",
+        "16",
+        "22"
+      ]
+    },
+    {
+      "id": "c58e",
+      "createdAt": "2025-09-04T09:20:53.720Z",
+      "userName": "User",
+      "cards": [
+        "4",
+        "18",
+        "22"
+      ]
+    },
+    {
+      "id": "cd01",
+      "createdAt": "2025-09-04T09:29:26.954Z",
+      "userName": "Jashaira",
+      "cards": [
+        "8",
+        "20",
+        "21"
+      ]
+    },
+    {
+      "id": "17d6",
+      "createdAt": "2025-09-04T09:29:59.199Z",
+      "userName": "Daniella",
+      "cards": [
+        "20",
+        "17",
+        "16"
+      ]
+    }
+  ]
 }

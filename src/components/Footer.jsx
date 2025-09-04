@@ -1,23 +1,23 @@
-import instagram from "../../assets/instagram.png"
-import tiktok from "../../assets/tiktok.png"
-import whatsapp from "../../assets/whatsapp.png"
+import instagram from "../../src/assets/images/instagram.png"
+import tiktok from "../../src/assets/images/tiktok.png"
+import whatsapp from "../../src/assets/images/whatsapp.png"
 
 
 function Footer() {
     return (
-        <footer className="bottom-0 left-0 mt-8 mb-5 w-full h-full shadow-md">
+        <footer className="bottom-0 left-0 pr-4 pl-4 mt-10 mb-5 w-full h-full ">
             <div className="max-w-7xl mx-auto flex flex-col-reverse md:flex-row items-center justify-between gap-4">
-                <p className="text-center text-xl md:text-right text-white">
+                <p className="text-center text-xs md:text-sm md:text-right text-white">
                     © 2025. Todos los derechos reservados.
                 </p>
-                <div className="flex gap-9">
+                <div className="flex gap-3 md:gap-9">
                     <a
                         href="https://instagram.com"
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label="Instagram"
                     >
-                        <img src={instagram} alt="Instagram" className="w-8 h-auto transition-transform duration-200 hover:scale-125" />
+                        <img src={instagram} alt="Instagram" className="w-8 h-auto transition-transform duration-200 hover:scale-110" />
                     </a>
                     <a
                         href="https://tiktok.com"

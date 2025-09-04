@@ -1,20 +1,21 @@
 import './App.css'
 import { Toaster } from 'react-hot-toast'
-import Header from './components/Header/Header'
-import Footer from './components/Footer/Footer'
-import Homepage from './pages/Homepage'
-
+import Header from './components/Header'
+import Footer from './components/Footer'
+import AppRoutes from './application/Router'
+import ScrollToTop from './components/ScrollToTop'
 
 function App() {
-
   return (
     <>
-      <Toaster position="top-right" reverseOrder={false} />
+      <Toaster position="top-center" reverseOrder={false} />
+      <ScrollToTop />
       <Header />
-      <Homepage />
+      <AppRoutes />
       <Footer />
+      
+      
     </>
   )
 }
-
-export default App;
+export default App
