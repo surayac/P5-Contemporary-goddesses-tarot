@@ -12,7 +12,7 @@ const Deck = () => {
   const navigate = useNavigate();
 
   const [cardWidth, setCardWidth] = useState(60);
-  const [cardOverlap, setCardOverlap] = useState(30); // porcentaje inicial
+  const [cardOverlap, setCardOverlap] = useState(30); 
 
   useEffect(() => {
     const fetchCards = async () => {
@@ -26,12 +26,11 @@ const Deck = () => {
     fetchCards();
   }, []);
 
-  // Ajustar tamaño de carta y overlap para que quepan 11 cartas con 50% superposición
   useEffect(() => {
     const updateCardSizes = () => {
       const maxWidth = window.innerWidth;
       const numberOfCards = 11;
-      const overlapFactor = 0.5; // 50% superposición
+      const overlapFactor = 0.5; 
       const width = maxWidth / (numberOfCards - overlapFactor);
       setCardWidth(width);
       setCardOverlap(width * overlapFactor);
@@ -104,9 +103,9 @@ const Deck = () => {
         ESCOGE <br className="md:hidden" /> TRES CARTAS
       </h1>
 
-      {/* Fila 1 */}
+      {}
       {renderRow(cards.slice(0, 11), 0)}
-      {/* Fila 2, separada */}
+      {}
       {renderRow(cards.slice(11, 22), cardWidth * 1.2)}
     </main>
   );
