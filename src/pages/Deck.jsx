@@ -30,7 +30,7 @@ const Deck = () => {
     const updateCardSizes = () => {
       const maxWidth = window.innerWidth;
       const numberOfCards = 11;
-      const overlapFactor = 0.5; 
+      const overlapFactor = maxWidth < 500 ? 0.2 : maxWidth < 768 ? 0.2 : 0.5; 
       const width = maxWidth / (numberOfCards - overlapFactor);
       setCardWidth(width);
       setCardOverlap(width * overlapFactor);
@@ -103,10 +103,8 @@ const Deck = () => {
         ESCOGE <br className="md:hidden" /> TRES CARTAS
       </h1>
 
-      {}
       {renderRow(cards.slice(0, 11), 0)}
-      {}
-      {renderRow(cards.slice(11, 22), cardWidth * 1.2)}
+      {renderRow(cards.slice(11, 22), cardWidth * 0.5)}
     </main>
   );
 };
