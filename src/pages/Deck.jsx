@@ -93,7 +93,7 @@ const Deck = () => {
   }
 
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center px-4 py-10">
+    <main className="min-h-screen flex flex-col items-center  px-4 py-10">
       <section className="flex justify-between w-full mb-18 md:mb-24">
         <p className="text-white text-lg md:text-xl">¡Hola <ShowName />!</p>
         <p className="text-lg md:text-xl"><DateTime /></p>
