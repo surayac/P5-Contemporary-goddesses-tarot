@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Toaster, toast } from "react-hot-toast";
+import CustomToast from "./CustomToast";
 
 function Form({ onSubmit }) {
   const [name, setName] = useState("");
@@ -8,7 +8,7 @@ function Form({ onSubmit }) {
     e.preventDefault();
 
     if (!name.trim()) {
-      toast.error("Por favor, ingresa tu nombre.");
+      CustomToast.error("Por favor, ingresa tu nombre.");
       return;
     }
 
@@ -23,6 +23,7 @@ function Form({ onSubmit }) {
 
     if (onSubmit) {
       onSubmit(newUser);
+      CustomToast.success(`¡Bienvenido/a, ${name}!`);
     }
 
     setName("");
